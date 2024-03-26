@@ -10,7 +10,7 @@ class PriorityQueue { // https://studyjavascript.blogspot.com/2019/03/javascript
     getElem() {
         this.storage.sort(
             function compare(first, second) {
-                return second.prior - first.prior;
+                return -(second.prior - first.prior);
             }
             );
         
@@ -32,6 +32,7 @@ class Maze {
         this.mazeSize = size;
         this.startCell = 0;
         this.finishCell = size * size - 1;
+        this.buildingMode = 0; // 0 - стены, 1 - стартовая клетка, 2 - финишная клетка
     }
 
     // создание матрицы смежности (listOfEdges)
@@ -79,8 +80,6 @@ class Maze {
             }
             this.mazeMap.push(tempArray);
         }
-
-        //this.mazeMap[0][0] = 1;
     }
 
     // очищает массив лабиринта
@@ -111,12 +110,25 @@ class Maze {
 
     // ставит стартовую точку в ячейку number
     setStartCell(number) {
+        const currentMazeCell = document.getElementById(`mazeCell${this.startCell}`);
+        currentMazeCell.style.background = "white";
+
         this.startCell = number;
+        this.mazeMap[Math.floor(number / size)][number % size] = 0;
+        const newStartCell = document.getElementById(`mazeCell${this.startCell}`);
+        newStartCell.style.background = "green";
     }
 
     // ставит конечную точку в ячейку number
     setFinishCell(number) {
-        this.setFinishCell = number;
+        const currentMazeCell = document.getElementById(`mazeCell${this.finishCell}`);
+        currentMazeCell.style.background = "white";
+
+        this.finishCell = number;
+        this.mazeMap[Math.floor(number / size)][number % size] = 0;
+        const newStartCell = document.getElementById(`mazeCell${this.finishCell}`);
+        newStartCell.style.background = "red";
+
     }
 
     // ставит стену в ячейку number
@@ -158,20 +170,24 @@ class Maze {
         let code = `<div style='display: flex;'>`; // элементы в одной строчке
         for (let i = 0; i < size; i++) {
             let cellId = `mazeCell${number * size + i}`;
-            let cursorType = (number * size + i == this.startCell || number * size + i == this.finishCell) ? "grab" : "crosshair"; // если навести на обычную клетку - крестик
+            //let cursorType = (number * size + i == this.startCell || number * size + i == this.finishCell) ? "grab" : "crosshair"; // если навести на обычную клетку - крестик
             // на старт/финиш - рука
+            let cursorType = "crosshair";
             
             // onmousedown позволяет больше "спамить" нажатиями
             let cellCode = `<div id='${cellId}'
-            style='display: inline-block; width: ${cellSize}px; height: ${cellSize}px; cursor: ${cursorType}' onmousedown="maze.setWall(${number * size + i})"
+            style='display: inline-block; width: ${cellSize}px; height: ${cellSize}px; cursor: ${cursorType}' onmousedown="maze.changeCellType(${number * size + i})"
             onmouseover="maze.checkMouseButton(${number * size + i})"
             onmouseleave="maze.paintCellBack(${number * size + i})"></div>`;
-            //style='display: inline-block; width: ${cellSize}px; height: ${cellSize}px; cursor: ${cursorType}' onmouseleave="maze.paintCellBack(${number * size + i})" 
-            //onmouseenter="maze.paintPinkCell(${number * size + i})" onmousedown="maze.setWall(${number * size + i})"></div>`;
 
-            //style='display: inline-block; width: ${cellSize}px; height: ${cellSize}px; cursor: ${cursorType}' onmousedown="maze.setWall(${number * size + i})"></div>`;
-            //style='display: inline-block; width: ${cellSize}px; height: ${cellSize}px; cursor: ${cursorType}' onmouseover="maze.setWall(${number * size + i})"></div>`;
-            //style='display: inline-block; width: ${cellSize}px; height: ${cellSize}px; cursor: ${cursorType}' onClick="maze.setWall(${number * size + i})"></div>`;
+            // style='display: inline-block; width: ${cellSize}px; height: ${cellSize}px; cursor: ${cursorType}' onmouseleave="maze.paintCellBack(${number * size + i})" 
+            // onmouseenter="maze.paintPinkCell(${number * size + i})" onmousedown="maze.setWall(${number * size + i})"></div>`;
+
+            // ниже - рисование (но с пролагиваниями)
+            // style='display: inline-block; width: ${cellSize}px; height: ${cellSize}px; cursor: ${cursorType}' onmousedown="maze.setWall(${number * size + i})"
+            // onmouseover="maze.checkMouseButton(${number * size + i})"
+            // onmouseleave="maze.paintCellBack(${number * size + i})"></div>`;
+
             // добавляем характеристики клетки + возможность кликнуть на неё
             code += cellCode;
         }
@@ -195,16 +211,21 @@ class Maze {
                 elem.style.borderWidth = 1;
                 elem.style.borderColor = 'black';
                 elem.style.borderStyle = 'solid';
+
+                // if (i * size + j == this.startCell || i * size + j == this.finishCell) { // возможность двигать элемент
+                //     elem.draggable = "true";
+                // }
             }
         }
+        this.startCell = 0;
+        this.finishCell = size * size - 1;
 
         document.getElementById(`mazeCell${this.startCell}`).style.background = "green";
-        //document.getElementById(`mazeCell${this.startCell}`).textContent = "s";
 
         document.getElementById(`mazeCell${this.finishCell}`).style.background = "red";
-        //document.getElementById(`mazeCell${this.finishCell}`).textContent = "f";
     }
 
+    // окрашивает клетку в розовый
     paintPinkCell(number) {
         if (number != this.startCell && number != this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
@@ -213,6 +234,7 @@ class Maze {
         }
     }
 
+    // окрашивает клетку обратно в её изначальный цвет
     paintCellBack(number) {
         if (number != this.startCell && number != this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
@@ -357,15 +379,7 @@ class Maze {
         }
     }
 
-    getDist(first, second) {
-        let firstX = Math.floor(first / size);
-        let firstY = first % size;
-
-        let secondX = Math.floor(second / size);
-        let secondY = second % size;
-        return Math.abs(firstX- secondX) + Math.abs(firstY - secondY);
-    }
-
+    // окрашивает клетку из очереди
     wallIsGettingReady(number) {
         if (number != this.startCell && number != this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
@@ -374,6 +388,7 @@ class Maze {
         }
     }
 
+    // окрашивает уже просмотренную клетку
     wallIsReviewed(number) {
         if (number != this.startCell && number != this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
@@ -382,6 +397,7 @@ class Maze {
         }
     }
 
+    // окрашивает клетку, являющуюся частью пути
     wallIsPartOfTheWay(number) {
         if (number != this.startCell && number != this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
@@ -390,16 +406,51 @@ class Maze {
         }
     }
 
+    // меняет тип клетки в зависимости от текущего режима строительства
+    changeCellType(number) {
+        if (this.buildingMode == 0) {
+            this.setWall(number);
+        }
+        else if (this.buildingMode == 1) {
+            this.setStartCell(number);
+        }
+        else {
+            this.setFinishCell(number);
+        }
+        
+    }
+
+    // проверяет, нажата ли кнопка мыши
     checkMouseButton(number) {
 
-        if (isMouseDown) {
+        if (isMouseDown && this.buildingMode == 0) {
+            // document.getElementById(`mazeCell${number}`).onmouseover = function(event) {
+            //     if (event.which == 2) {maze.setWall(number);} // Нажато колёсико мыши
+            // }
+            // !!! рекомендовано именно рисовать стенки на колёсико мыши
             this.setWall(number);
         }
         else {
             this.paintPinkCell(number);
         }
+
+        // document.getElementById(`mazeCell${number}`).addEventListener("mousedown", function(event) {
+        //     event.preventDefault();
+        //     event.stopPropagation();
+        // });
     }
 
+    // вычисляет расстояние между двумя клетками (для алгоритма)
+    getDist(first, second) {
+        let firstX = Math.floor(first / size);
+        let firstY = first % size;
+
+        let secondX = Math.floor(second / size);
+        let secondY = second % size;
+        return Math.abs(firstX - secondX) + Math.abs(firstY - secondY);
+    }
+
+    // запускает алгоритм
     goAlg() {
         this.getListOfEdges();
         this.clearAlg();
@@ -416,12 +467,12 @@ class Maze {
 
             let currentNode = queue.getElem();
 
-            this.wallIsReviewed(currentNode); // достали стену из очереди - покрасили жёлтым
-
             if (currentNode == this.finishCell) {
                 succes = true;
                 break;
             }
+
+            this.wallIsReviewed(currentNode); // достали стену из очереди - покрасили жёлтым
 
             for (let elem of this.listOfEdges[currentNode]) {
                 let newCost = cost.get(currentNode) + 1;
@@ -444,7 +495,6 @@ class Maze {
                 }
             }
         }
-
         
         if (succes) {
             let wayCell = this.finishCell;
@@ -462,6 +512,7 @@ class Maze {
 }
 
 let isMouseDown = false;
+
 document.body.onmousedown = function() { 
   isMouseDown = true;
 }
@@ -475,7 +526,6 @@ resizeMaze();
 function resizeMaze() {
     size = document.getElementById("slider").value;
     maze.size = size;
-    maze.finishCell = size * size - 1;
     maze.buildClearMaze();
     maze.drawMaze();
 }
@@ -483,4 +533,17 @@ function resizeMaze() {
 function generateClick() {
     maze.clearMaze();
     maze.generateMap();
+}
+
+function selectBuildMode() {
+    option = document.getElementById("selectBuildingMode").value;
+    if (option == "option1") {
+        maze.buildingMode = 0;
+    }
+    else if (option == "option2") {
+        maze.buildingMode = 1;
+    }
+    else {
+        maze.buildingMode = 2;
+    }
 }

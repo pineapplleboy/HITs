@@ -20,4 +20,10 @@
     <input type="button" value="Очистить результат работы алгоритма" id="clearAlgButton" onclick="maze.clearAlg()"></button>
     <br> <br>
     <input type="button" value="Запустить алгоритм" id="goAlgButton" onclick="maze.goAlg()"></button>
+    <br><br>
+    <select id="selectBuildingMode" oninput="selectBuildMode()">
+        <option value="option1">Стены</option>
+        <option value="option2">Старт</option>
+        <option value="option3">Финиш</option>
+    </select>
 </body>
