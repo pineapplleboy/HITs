@@ -19,11 +19,19 @@
     <input type="button" value="Очистить карту" id="clearMapButton" onclick="maze.clearMaze()"></button>
     <input type="button" value="Очистить результат работы алгоритма" id="clearAlgButton" onclick="maze.clearAlg()"></button>
     <br> <br>
+
     <input type="button" value="Запустить алгоритм" id="goAlgButton" onclick="maze.goAlg()"></button>
+    <input type="button" value="Пауза" id="pauseButton" disabled="true" onclick="setPause()"></button>
     <br><br>
+
+    Выберите режим строительства:
     <select id="selectBuildingMode" oninput="selectBuildMode()">
         <option value="option1">Стены</option>
         <option value="option2">Старт</option>
         <option value="option3">Финиш</option>
     </select>
+
+    <br>
+    Скорость анимации:
+    <input id="sliderAnimation" type="range" min="0" max="100" step="1" value="50" oninput="setAnimationSpeed()">
 </body>
