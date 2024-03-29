@@ -36,6 +36,7 @@ class Maze {
         this.animationSpeed = 50; // скорость анимации (время в ms = 100 - animationSpeed)
         this.pause = false; // ставит на паузу отрисовку алгоритма
         this.running = false; // алгоритм за работой
+        this.stopAlg = false; // гоп-стопаем алгоритм
     }
 
     // создание матрицы смежности (listOfEdges)
@@ -113,25 +114,28 @@ class Maze {
 
     // ставит стартовую точку в ячейку number
     setStartCell(number) {
-        const currentMazeCell = document.getElementById(`mazeCell${this.startCell}`);
-        currentMazeCell.style.background = "white";
-
-        this.startCell = number;
-        this.mazeMap[Math.floor(number / size)][number % size] = 0;
-        const newStartCell = document.getElementById(`mazeCell${this.startCell}`);
-        newStartCell.style.background = "green";
+        if (number != this.finishCell) {
+            const currentMazeCell = document.getElementById(`mazeCell${this.startCell}`);
+            currentMazeCell.style.background = "white";
+    
+            this.startCell = number;
+            this.mazeMap[Math.floor(number / size)][number % size] = 0;
+            const newStartCell = document.getElementById(`mazeCell${this.startCell}`);
+            newStartCell.style.background = "green";
+        }      
     }
 
     // ставит конечную точку в ячейку number
     setFinishCell(number) {
-        const currentMazeCell = document.getElementById(`mazeCell${this.finishCell}`);
-        currentMazeCell.style.background = "white";
-
-        this.finishCell = number;
-        this.mazeMap[Math.floor(number / size)][number % size] = 0;
-        const newStartCell = document.getElementById(`mazeCell${this.finishCell}`);
-        newStartCell.style.background = "red";
-
+        if (number != this.startCell) {
+            const currentMazeCell = document.getElementById(`mazeCell${this.finishCell}`);
+            currentMazeCell.style.background = "white";
+    
+            this.finishCell = number;
+            this.mazeMap[Math.floor(number / size)][number % size] = 0;
+            const newStartCell = document.getElementById(`mazeCell${this.finishCell}`);
+            newStartCell.style.background = "red";
+        }
     }
 
     // ставит стену в ячейку number
@@ -382,6 +386,81 @@ class Maze {
         }
     }
 
+    // генерация лабиринта
+    generateMaze() {
+        let weightMatrix = new Array();
+
+        for (let i = 0; i < size; i++) {
+            for (let j = 0; j < size; j++) {
+                this.setWall(i * size + j);
+            }
+        }
+
+        for (let i = 0; i < size; i++) {
+            let temp = new Array();
+            for (let j = 0; j < size; j++) {
+                temp.push(Math.floor(Math.random() * 50));
+            }
+            weightMatrix.push(temp);
+        }
+        
+        let queue = new PriorityQueue();
+        let cameFrom = new Map();
+
+        if (this.startCell - 2 * size >= 0) {
+            queue.addElem(this.startCell - 2 * size, weightMatrix[Math.floor((this.startCell - 2 * size) / size)][(this.startCell - 2 * size) % size]);
+            this.setWall(this.startCell - 2 * size);
+            cameFrom.set(this.startCell - 2 * size, this.startCell);
+        }
+        if (this.startCell + 2 * size <= size * size - 1) {
+            queue.addElem(this.startCell + 2 * Number(size), weightMatrix[Math.floor((this.startCell + 2 * Number(size)) / size)][(this.startCell + 2 * Number(size)) % size]);
+            this.setWall(this.startCell + 2 * Number(size));
+            cameFrom.set(this.startCell + 2 * size, this.startCell);
+        }
+        if (this.startCell % size - 2 >= 0) {
+            queue.addElem(this.startCell - 2, weightMatrix[Math.floor((this.startCell - 2) / size)][(this.startCell - 2) % size]);
+            this.setWall(this.startCell - 2);
+            cameFrom.set(this.startCell - 2, this.startCell);
+        }
+        if (this.startCell % size + 2 <= size - 1) {
+            queue.addElem(this.startCell + 2, weightMatrix[Math.floor((this.startCell + 2) / size)][(this.startCell + 2) % size]);
+            this.setWall(this.startCell + 2);
+            cameFrom.set(this.startCell + 2, this.startCell);
+        }
+        
+        while (queue.size() != 0) {
+            let currentCell = queue.getElem();
+
+            let cameFromCell = cameFrom.get(currentCell);
+            if (this.mazeMap[Math.floor(((cameFromCell + currentCell) / 2) / size)][((cameFromCell + currentCell) / 2) % size] == -1) {
+                this.setWall((cameFromCell + currentCell) / 2);
+            }
+            
+            if (currentCell - 2 * size >= 0 && (this.mazeMap[Math.floor((currentCell - 2 * size) / size)][(currentCell - 2 * size) % size] == -1
+            || currentCell - 2 * size == this.finishCell)) {
+                queue.addElem(currentCell - 2 * size, weightMatrix[Math.floor((currentCell - 2 * size) / size)][(currentCell - 2 * size) % size]);
+                this.setWall(currentCell - 2 * size);
+                cameFrom.set(currentCell - 2 * size, currentCell);
+            }
+            if (currentCell + 2 * Number(size) <= size * size - 1 && (this.mazeMap[Math.floor((currentCell + 2 * Number(size)) / size)][(currentCell + 2 * Number(size)) % size] == -1
+            || currentCell + 2 * Number(size) == this.finishCell)) {
+                queue.addElem(currentCell + 2 * Number(size), weightMatrix[Math.floor((currentCell + 2 * Number(size)) / size)][(currentCell + 2 * Number(size)) % size]);
+                this.setWall(currentCell + 2 * Number(size));
+                cameFrom.set(currentCell + 2 * Number(size), currentCell);
+            }
+            if (currentCell % size - 2 >= 0 && (this.mazeMap[Math.floor((currentCell - 2) / size)][(currentCell - 2) % size] == -1 || currentCell - 2 == this.finishCell)) {
+                queue.addElem(currentCell - 2 , weightMatrix[Math.floor((currentCell - 2) / size)][(currentCell - 2) % size]);
+                this.setWall(currentCell - 2);
+                cameFrom.set(currentCell - 2, currentCell);
+            }
+            if (currentCell % size + 2 < size && (this.mazeMap[Math.floor((currentCell + 2) / size)][(currentCell + 2) % size] == -1 || currentCell + 2 == this.finishCell)) {
+                queue.addElem(currentCell + 2, weightMatrix[Math.floor((currentCell + 2) / size)][(currentCell + 2) % size]);
+                this.setWall(currentCell + 2);
+                cameFrom.set(currentCell + 2, currentCell);
+            }
+        }
+    }
+
     // окрашивает клетку из очереди
     wallIsGettingReady(number) {
         if (number != this.startCell && number != this.finishCell) {
@@ -458,6 +537,7 @@ class Maze {
 
     // запускает алгоритм
     goAlg() {
+        this.stopAlg = false;
         this.getListOfEdges();
         this.clearAlg();
         let queue = new PriorityQueue();
@@ -473,7 +553,8 @@ class Maze {
 
         let succes = false;
 
-        let elements = ["slider", "generateMapButton", "clearMapButton", "clearAlgButton", "goAlgButton", "selectBuildingMode", "sliderAnimation"];
+        let elements = ["slider", "generateMapButton", "clearMapButton", "clearAlgButton", "goAlgButton", "selectBuildingMode", "sliderAnimation", 
+        "generateMazeButton"];
 
         for (let elem of elements) {
             document.getElementById(elem).disabled = true; // блокируем все элементы
@@ -513,6 +594,21 @@ class Maze {
         // }
 
         const IntervalId = setInterval(function() {
+            if (maze.stopAlg) {
+                maze.stopAlg = false;
+                maze.running = false;
+                maze.pause = false;
+                for (let elem of elements) { // разблокируем все элементы
+                    if (size % 2 == 0 && elem == "generateMazeButton") {
+                        continue;
+                    }
+                    document.getElementById(elem).disabled = false;
+                }
+                document.getElementById("pauseButton").disabled = true;
+                document.getElementById("pauseButton").value = "Пауза";
+                clearInterval(IntervalId);
+            }
+
             if (queue.size() > 0 && !maze.pause) {
                 let currentNode = queue.getElem();
             
@@ -552,6 +648,9 @@ class Maze {
                     if (!maze.pause) {
                         if (wayCell == maze.startCell) {
                             for (let elem of elements) { // разблокируем все элементы
+                                if (size % 2 == 0 && elem == "generateMazeButton") {
+                                    continue;
+                                }
                                 document.getElementById(elem).disabled = false;
                             }
                             document.getElementById("pauseButton").disabled = true;
@@ -571,6 +670,9 @@ class Maze {
             }
             else if (queue.size() == 0) {
                 for (let elem of elements) { // разблокируем все элементы
+                    if (size % 2 == 0 && elem == "generateMazeButton") {
+                        continue;
+                    }
                     document.getElementById(elem).disabled = false;
                 }
                 document.getElementById("pauseButton").disabled = true;
@@ -606,11 +708,21 @@ document.body.onmouseup = function() {
   isMouseDown = false;
 }
 
+document.getElementById("pauseButton").addEventListener('dblclick', event => {
+    maze.stopAlg = true;
+  })
+
 let maze = new Maze(16);
 resizeMaze();
 
 function resizeMaze() {
     size = document.getElementById("slider").value;
+    if (size % 2 == 0) {
+        document.getElementById("generateMazeButton").disabled = true;
+    }
+    else {
+        document.getElementById("generateMazeButton").disabled = false;
+    }
     maze.size = size;
     maze.buildClearMaze();
     maze.drawMaze();
@@ -619,6 +731,11 @@ function resizeMaze() {
 function generateClick() {
     maze.clearMaze();
     maze.generateMap();
+}
+
+function generateMazeClick() {
+    maze.clearMaze();
+    maze.generateMaze();
 }
 
 function selectBuildMode() {

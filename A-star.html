@@ -10,12 +10,13 @@
     <form oninput="sliderResult.value=slider.value">
         Размер карты:
         <br>
-        <input id="slider" type="range" min="4" max="30" step="1" value="16" oninput="resizeMaze()">
-        <output name="sliderResult">16</output>
+        <input id="slider" type="range" min="4" max="31" step="1" value="17" oninput="resizeMaze()">
+        <output name="sliderResult">17</output>
     </form>
     <div id="maze"></div>
     <br>
     <input type="button" value="Сгенерировать карту" id="generateMapButton" onclick="generateClick()"></button>
+    <input type="button" value="Сгенерировать лабриринт" id="generateMazeButton" onclick="generateMazeClick()"></button>
     <input type="button" value="Очистить карту" id="clearMapButton" onclick="maze.clearMaze()"></button>
     <input type="button" value="Очистить результат работы алгоритма" id="clearAlgButton" onclick="maze.clearAlg()"></button>
     <br> <br>
