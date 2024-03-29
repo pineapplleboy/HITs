@@ -407,25 +407,27 @@ class Maze {
         let queue = new PriorityQueue();
         let cameFrom = new Map();
 
-        if (this.startCell - 2 * size >= 0) {
-            queue.addElem(this.startCell - 2 * size, weightMatrix[Math.floor((this.startCell - 2 * size) / size)][(this.startCell - 2 * size) % size]);
-            this.setWall(this.startCell - 2 * size);
-            cameFrom.set(this.startCell - 2 * size, this.startCell);
+        let startMazeCell = 0;
+
+        if (startMazeCell - 2 * size >= 0) {
+            queue.addElem(startMazeCell - 2 * size, weightMatrix[Math.floor((startMazeCell - 2 * size) / size)][(startMazeCell - 2 * size) % size]);
+            this.setWall(startMazeCell - 2 * size);
+            cameFrom.set(startMazeCell - 2 * size, startMazeCell);
         }
-        if (this.startCell + 2 * size <= size * size - 1) {
-            queue.addElem(this.startCell + 2 * Number(size), weightMatrix[Math.floor((this.startCell + 2 * Number(size)) / size)][(this.startCell + 2 * Number(size)) % size]);
-            this.setWall(this.startCell + 2 * Number(size));
-            cameFrom.set(this.startCell + 2 * size, this.startCell);
+        if (startMazeCell + 2 * size <= size * size - 1) {
+            queue.addElem(startMazeCell + 2 * Number(size), weightMatrix[Math.floor((startMazeCell + 2 * Number(size)) / size)][(startMazeCell + 2 * Number(size)) % size]);
+            this.setWall(startMazeCell + 2 * Number(size));
+            cameFrom.set(startMazeCell + 2 * size, startMazeCell);
         }
-        if (this.startCell % size - 2 >= 0) {
-            queue.addElem(this.startCell - 2, weightMatrix[Math.floor((this.startCell - 2) / size)][(this.startCell - 2) % size]);
-            this.setWall(this.startCell - 2);
-            cameFrom.set(this.startCell - 2, this.startCell);
+        if (startMazeCell % size - 2 >= 0) {
+            queue.addElem(startMazeCell - 2, weightMatrix[Math.floor((startMazeCell - 2) / size)][(startMazeCell - 2) % size]);
+            this.setWall(startMazeCell - 2);
+            cameFrom.set(startMazeCell - 2, startMazeCell);
         }
-        if (this.startCell % size + 2 <= size - 1) {
-            queue.addElem(this.startCell + 2, weightMatrix[Math.floor((this.startCell + 2) / size)][(this.startCell + 2) % size]);
-            this.setWall(this.startCell + 2);
-            cameFrom.set(this.startCell + 2, this.startCell);
+        if (startMazeCell % size + 2 <= size - 1) {
+            queue.addElem(startMazeCell + 2, weightMatrix[Math.floor((startMazeCell + 2) / size)][(startMazeCell + 2) % size]);
+            this.setWall(startMazeCell + 2);
+            cameFrom.set(startMazeCell + 2, startMazeCell);
         }
         
         while (queue.size() != 0) {
@@ -437,23 +439,25 @@ class Maze {
             }
             
             if (currentCell - 2 * size >= 0 && (this.mazeMap[Math.floor((currentCell - 2 * size) / size)][(currentCell - 2 * size) % size] == -1
-            || currentCell - 2 * size == this.finishCell)) {
+            || currentCell - 2 * size == this.finishCell || currentCell - 2 * size == this.startCell)) {
                 queue.addElem(currentCell - 2 * size, weightMatrix[Math.floor((currentCell - 2 * size) / size)][(currentCell - 2 * size) % size]);
                 this.setWall(currentCell - 2 * size);
                 cameFrom.set(currentCell - 2 * size, currentCell);
             }
             if (currentCell + 2 * Number(size) <= size * size - 1 && (this.mazeMap[Math.floor((currentCell + 2 * Number(size)) / size)][(currentCell + 2 * Number(size)) % size] == -1
-            || currentCell + 2 * Number(size) == this.finishCell)) {
+            || currentCell + 2 * Number(size) == this.finishCell || currentCell + 2 * Number(size) == this.startCell)) {
                 queue.addElem(currentCell + 2 * Number(size), weightMatrix[Math.floor((currentCell + 2 * Number(size)) / size)][(currentCell + 2 * Number(size)) % size]);
                 this.setWall(currentCell + 2 * Number(size));
                 cameFrom.set(currentCell + 2 * Number(size), currentCell);
             }
-            if (currentCell % size - 2 >= 0 && (this.mazeMap[Math.floor((currentCell - 2) / size)][(currentCell - 2) % size] == -1 || currentCell - 2 == this.finishCell)) {
+            if (currentCell % size - 2 >= 0 && (this.mazeMap[Math.floor((currentCell - 2) / size)][(currentCell - 2) % size] == -1 
+            || currentCell - 2 == this.finishCell || currentCell - 2 == this.startCell)) {
                 queue.addElem(currentCell - 2 , weightMatrix[Math.floor((currentCell - 2) / size)][(currentCell - 2) % size]);
                 this.setWall(currentCell - 2);
                 cameFrom.set(currentCell - 2, currentCell);
             }
-            if (currentCell % size + 2 < size && (this.mazeMap[Math.floor((currentCell + 2) / size)][(currentCell + 2) % size] == -1 || currentCell + 2 == this.finishCell)) {
+            if (currentCell % size + 2 < size && (this.mazeMap[Math.floor((currentCell + 2) / size)][(currentCell + 2) % size] == -1 
+            || currentCell + 2 == this.finishCell || currentCell + 2 == this.startCell)) {
                 queue.addElem(currentCell + 2, weightMatrix[Math.floor((currentCell + 2) / size)][(currentCell + 2) % size]);
                 this.setWall(currentCell + 2);
                 cameFrom.set(currentCell + 2, currentCell);
