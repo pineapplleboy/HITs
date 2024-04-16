@@ -1,0 +1,12 @@
+#canvas {
+    position: relative;
+    display: block;
+    z-index: 1;
+}
+
+#canvasPoints{
+    position: absolute;
+    display: block;
+    background-color: rgb(249, 116, 138);
+    z-index: 0;
+}

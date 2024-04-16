@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ant Algorithm</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+    <body>
+
+        <section class="background"></section>
+        <canvas class="grain"></canvas>
+
+        <h1>Муравьиный алгоритм</h1>
+    
+        <div class="mainAlgorithmUI">
+
+            <section class="sliderContainer">
+                <div class="fullSlider">
+                    <label for="antsAmount">Ants amount:</label>
+                    <input type="range" id="antsAmount" min="10" max="2000" value="500">
+                </div>
+                <div class="fullSlider">
+                    <label for="feromoneCoef">Feromone coefficient:</label>
+                    <input type="range" id="feromoneCoef" min="0" max="20" value="5">
+                </div>
+                <div class="fullSlider">
+                    <label for="antsInCellCoef">antsInCellCoef:</label>
+                    <input type="range" id="antsInCellCoef" min="1" max="20" value="10">
+                </div>
+                <div class="fullSlider">
+                    <label for="foodValueCoef">foodValueCoef:</label>
+                    <input type="range" id="foodValueCoef" min="1" max="1000" value="500">
+                </div>
+                <div class="fullSlider">
+                    <label for="decreasingFeromone">decreasingFeromone:</label>
+                    <input type="range" id="decreasingFeromone" min="1" max="100" value="85">
+                </div>
+                <div class="fullSlider">
+                    <label for="increasingFeromone">increasingFeromone:</label>
+                    <input type="range" id="increasingFeromone" min="1" max="500" value="20">
+                </div>
+                <div class="fullSlider">
+                    <label for="foodValue">foodValue:</label>
+                    <input type="range" id="foodValue" min="1" max="50" value="5">
+                </div>
+                <div class="fullSlider">
+                    <label for="antStepDist">antStepDist:</label>
+                    <input type="range" id="antStepDist" min="2" max="20" value="14">
+                </div>
+
+            </section>
+            <section class="mainPicture">
+                <canvas id="antCanvas"></canvas>
+            </section>
+
+            <section class="buttonContainer">
+                <button id="startSimulation">Запустить алгоритм</button>
+                <button id="setWall">Поставить стену</button>
+                <button id="setFood">Поставить еду</button>
+                <button id="setHome">Поставить дом</button>
+                <button id="pauseAntSim">Пауза</button>
+            </section>            
+        </div>
+
+        <script type="module" src="js/antClass.js"></script>
+        <script type="module" src="js/map.js"></script>
+        <script type="module" src="js/main.js"></script>
+        <script src="js/grain.js"></script>
+        <script src ="js/backgroundBlobs.js"></script>
+    </body>
+</html>
