@@ -36,11 +36,11 @@ document.getElementById("clasterButton").onclick = function() {
 }
 
 document.getElementById("geneticButton").onclick = function() {
-    window.location.href = "../A-star";
+    window.location.href = "../geneticAlgorithm";
 }
 
 document.getElementById("antButton").onclick = function() {
-    window.location.href = "../A-star";
+    window.location.href = "../antAlgorithm";
 }
 
 document.getElementById("treeButton").onclick = function() {
