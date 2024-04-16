@@ -1,0 +1,35 @@
+<!DOCTYPE html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Йооу</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="module" src="js/main.js" defer></script>
+</head>
+<body>
+    <h1>Алгоритмы</h1>
+    <h2>Салют! Это алгоритм A*</h2>
+    <form oninput="sliderResult.value=slider.value">
+        Размер карты:
+        <input id="slider" type="range" min="4" max="31" step="1" value="17">
+        <output name="sliderResult">17</output>
+    </form>
+    <div id="maze"></div>
+
+    <button id="generateMapButton">Сгенерировать карту</button>
+    <button id="generateMazeButton">Сгенерировать лабриринт</button>
+    <button id="clearMapButton">Очистить карту</button>
+    <button id="clearAlgButton">Очистить результат работы алгоритма</button>
+
+    <button id="goAlgButton">Запустить алгоритм</button>
+    <button id="pauseButton" disabled="true">Пауза</button>
+
+    Выберите режим строительства:
+    <select id="selectBuildingMode">
+        <option value="option1">Стены</option>
+        <option value="option2">Старт</option>
+        <option value="option3">Финиш</option>
+    </select>
+
+    Скорость анимации:
+    <input id="sliderAnimation" type="range" min="0" max="100" step="1" value="50">
+</body>

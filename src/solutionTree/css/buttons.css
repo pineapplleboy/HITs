@@ -1,0 +1,19 @@
+button {
+    background-color: green;
+    border-radius: 10px;
+    color: white;
+    height: 50px;
+    width: 200px;
+    border: 2px solid black;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+button:hover {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px greenyellow;
+}
+
+button:active {
+    background-color: rgb(6, 99, 6);
+}

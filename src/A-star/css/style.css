@@ -1,0 +1,31 @@
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    color: rgb(255, 255, 255);
+}
+
+div#maze {
+    left: 100%;
+    top: 50%;
+}
+
+/* button {
+    background-color: aliceblue;
+    padding: 10px 30px;
+    font-size: 15px;
+    border-radius: 10em;
+    border: 2px solid var(--button-color);
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+} */
