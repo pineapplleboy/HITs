@@ -4,32 +4,50 @@
     <title>Йооу</title>
     <link rel="stylesheet" href="css/style.css">
     <script type="module" src="js/main.js" defer></script>
+    <script src="../antAlgorithm/js/grain.js" defer></script>
+    <script src="../antAlgorithm/js/backgroundBlobs.js" defer></script>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+
+    <section class="background"></section>
+    <canvas class="grain"></canvas>
+
     <h1>Алгоритмы</h1>
     <h2>Салют! Это алгоритм A*</h2>
-    <form oninput="sliderResult.value=slider.value">
-        Размер карты:
-        <input id="slider" type="range" min="4" max="31" step="1" value="17">
-        <output name="sliderResult">17</output>
-    </form>
-    <div id="maze"></div>
+    <div class="mainAlgorithmUI">
 
-    <button id="generateMapButton">Сгенерировать карту</button>
-    <button id="generateMazeButton">Сгенерировать лабриринт</button>
-    <button id="clearMapButton">Очистить карту</button>
-    <button id="clearAlgButton">Очистить результат работы алгоритма</button>
+        <section class="sliderContainer">
+            <form oninput="sliderResult.value=slider.value">
+                Размер карты:
+                <input id="slider" type="range" min="4" max="31" step="1" value="17">
+                <output name="sliderResult">17</output>
+            </form>
+            Скорость анимации:
+            <input id="sliderAnimation" type="range" min="0" max="100" step="1" value="50">
+        </section>
 
-    <button id="goAlgButton">Запустить алгоритм</button>
-    <button id="pauseButton" disabled="true">Пауза</button>
+        <div class="mainPicture">
+            <div id="maze"></div>
+        </div>
 
-    Выберите режим строительства:
-    <select id="selectBuildingMode">
-        <option value="option1">Стены</option>
-        <option value="option2">Старт</option>
-        <option value="option3">Финиш</option>
-    </select>
+        <section class="buttonContainer">
 
-    Скорость анимации:
-    <input id="sliderAnimation" type="range" min="0" max="100" step="1" value="50">
+            <button id="generateMapButton">Сгенерировать карту</button>
+            <button id="generateMazeButton">Сгенерировать лабриринт</button>
+            <button id="clearMapButton">Очистить карту</button>
+            <button id="clearAlgButton">Очистить результат работы алгоритма</button>
+        
+            <button id="goAlgButton">Запустить алгоритм</button>
+            <button id="pauseButton" disabled="true">Пауза</button>
+
+            Выберите режим строительства:
+            <select id="selectBuildingMode">
+                <option value="option1">Стены</option>
+                <option value="option2">Старт</option>
+                <option value="option3">Финиш</option>
+            </select>
+
+        </section>
+    </div>
 </body>

@@ -1,0 +1,68 @@
+.info-button {
+    position: absolute;
+    right: 5%;
+    top: 5%;
+    transform: (-5%, -5%);
+
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+
+    background-color: rgb(25, 109, 134);
+
+    font-size: large;
+}
+
+.info-button:hover {
+    background-color: rgb(43, 172, 211);
+    box-shadow: 0 0 0 2px white;
+}
+
+.info-button:active {
+    background-color: rgb(33, 192, 240);
+}
+
+dialog{
+    text-align: center;
+    border-radius: 10px;
+    position: fixed;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+}
+
+dialog::backdrop {
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 50vw;
+    height: 50vh;
+
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1),
+     rgba(255, 255, 255, 0.1));
+
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 0 rgba(0, 0, 0, 0.37);
+
+    border-radius: 20px;
+}
+
+.closeButton {
+    background-color: red;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+}
+
+.closeButton:hover {
+    background-color: rgb(204, 36, 36);
+    box-shadow: 0 0 0 2px rgb(134, 118, 118);
+}
+
+.closeButton:active {
+    background-color: rgb(196, 13, 13);
+}
