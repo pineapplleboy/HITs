@@ -7,22 +7,32 @@
     <script type="module" src="../antAlgorithm/js/grain.js" defer></script>
     <script type="module" src="../antAlgorithm/js/backgroundBlobs.js" defer></script>
 
-    <!-- <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/range.css">
     <link rel="stylesheet" href="css/buttons.css">
-    <link rel="stylesheet" href="css/inputTypes.css"> -->
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/inputTypes.css">
+    <link rel="stylesheet" href="css/infoButton.css">
+    <!-- <link rel="stylesheet" href="../css/style.css"> -->
 </head>
 
 <body>
 
     <section class="background"></section>
-    <canvas class="grain"></canvas>
+    <!-- <canvas class="grain"></canvas> -->
+
+    <button class="info-button" id="infoButton">?</button>
+
+    <dialog>
+        <div class="dialog-wrapper">
+            <h3>Информация</h3>
+            <button class="closeButton" id="closeDialog">X</button>
+        </div>
+    </dialog>
 
     <h1>Дерево решений</h1>
     
     <div style="overflow: scroll;" id="canvasId">
-        <canvas id="canvas" width="680" height="680" style="border:1px solid #ffffff;"></canvas>
+        <canvas id="canvas" width="680" height="680"></canvas>
     </div>
 
     <br>

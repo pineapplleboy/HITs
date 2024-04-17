@@ -1,20 +1,16 @@
-:root {
-    --index: calc(1vw + 1vh);
-}
-
-input[type="range"] {
+input[type="range"] {    
+    margin: 10px;
     -webkit-appearance: none;
     appearance: none;
-
-    width: 120px;
+    width: 160px;
     cursor: pointer;
     outline: none;
     align-items: center;
     
-    height: 30px;
-    background: #38ad21;
+    height: 40px;
+    background: #2ba369;
     border-radius: 10px;
-    border: 5px solid #38ad21;
+    border: 2px solid black;
 }
 
 input[type=range]::-webkit-slider-runnable-track {
@@ -33,10 +29,9 @@ input[type="range"]::-webkit-slider-thumb {
 
     height: 15px;
     width: 15px;
-    background-color: #4eb314;
+    background-color: white;
     border-radius: 50%;
-    border: 2px solid rgb(29, 238, 10);
+    border: 2px solid black;
 
     transition: .2s ease-in-out;
 }
-

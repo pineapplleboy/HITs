@@ -153,3 +153,13 @@ document.querySelector("#thirdVariant").onclick = function() {
     listBlock.hidden = true;
     textListBlock.textContent = "Режим строительства: финиш";
 }
+
+const dialog = document.querySelector("dialog");
+
+document.querySelector("#infoButton").onclick = function() {
+    dialog.showModal();
+}
+
+document.querySelector("#closeDialog").onclick = function() {
+    dialog.close();
+}

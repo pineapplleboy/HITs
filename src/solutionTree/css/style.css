@@ -35,9 +35,8 @@ div#canvasId {
 
     position: relative;
     overflow: hidden;
-    position: relative;
 
-    border: 1px solid green;
+    border: 2px solid green;
 
     left: 50%;
     /* margin-right: -50%; */
