@@ -2,13 +2,31 @@
 <html>
     <head>
         <title>Genetic Algorithm</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
-        <canvas id="canvasPoints"></canvas>
-        <canvas id="canvas"></canvas>
-        <button id="deleteField">Очистить поле</button>
-        <button id="startGeneticAlgorithm">Запустить алгоритм</button>
+        <section class="background"></section>
+        <canvas class="grain"></canvas>
+
+        <h1>Генетический алгоритм</h1>
+
+        <div class="mainAlgorithmUI">
+
+            <section class="sliderContainer"></section>
+
+            <div class="mainPicture">
+                <canvas id="canvasPoints"></canvas>
+                <canvas id="canvas"></canvas>
+            </div>
+
+            <section class="buttonContainer">
+                <button id="deleteField">Очистить поле</button>
+                <button id="startGeneticAlgorithm">Запустить алгоритм</button>
+            </section>
+        </div>
         <script src="main.js"></script>
+        <script src="../antAlgorithm/js/grain.js"></script>
+        <script src ="../antAlgorithm/js/backgroundBlobs.js"></script>
     </body>
 </html>

@@ -4,7 +4,8 @@ import {map} from './map.js';
 let canvas = document.getElementById("antCanvas");
 canvas.width = 520;
 canvas.height = 520;
-
+canvas.style.alignSelf = 'center';
+canvas.style.justifySelf = 'center';
 let ctx = canvas.getContext('2d');
 ctx.fillStyle = 'black';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
