@@ -141,17 +141,8 @@ export class Maze {
 
         console.log(ratio);
 
-        let cellSize;
-        if (ratio == 1) { // для разного масштабирования разные размеры
-            cellSize = (400 - this.mazeSize * 2) / this.mazeSize;
-        }
-        else if (ratio == 1.25) {
-            cellSize = (400 - this.mazeSize * 1.6) / this.mazeSize;
-        }
-        else {
-            cellSize = (400 - this.mazeSize * (2 / ratio)) / this.mazeSize;
-        }
-
+        let cellSize = (400 - this.mazeSize * (2 / ratio)) / this.mazeSize;
+        
         let code = `<div style='display: flex;'>`; // элементы в одной строчке
         for (let i = 0; i < this.mazeSize; i++) {
             let cellId = `mazeCell${number * this.mazeSize + i}`;
@@ -160,7 +151,7 @@ export class Maze {
             
             // onmousedown позволяет больше "спамить" нажатиями (лучше, чем onclick)
 
-            let cellCode = `<div id='${cellId}'
+            let cellCode = `<div class="singleCell" id='${cellId}'
             style='display: inline-block; width: ${cellSize}px; height: ${cellSize}px; cursor: ${cursorType}'></div>`;
 
             // добавляем характеристики клетки + возможность кликнуть на неё

@@ -60,6 +60,17 @@ document.querySelector('#sliderAnimation').oninput = function() { // выбор 
     setAnimationSpeed();
 }
 
+// document.addEventListener('resize', function(event) {
+
+//     console.log(13);
+//     cells = document.getElementsByClassName('singleCell');
+//     cellsArr = Array.from(cells);
+//     for(let i = 0; i < cellsArr.length; ++i){
+//         cells[i].style.height = cells[i].style.width;
+//         console.log(cells[i]);
+//     }
+// });
+
 // let listBlock = document.querySelector("#listId");
 
 // let textListBlock = document.getElementById("selectId");

@@ -95,8 +95,8 @@ function mouseenterHandler(event){
 
 function mousemoveHandler(event){
     const rect = canvas.getBoundingClientRect();
-    mouse.x = event.clientX - rect.left;
-    mouse.y = event.clientY - rect.top;
+    mouse.x = (event.clientX - rect.left) / rect.width * 520;
+    mouse.y = (event.clientY - rect.top) / rect.height * 520;
 }
 
 function mouseleaveHandler(event){
@@ -105,8 +105,11 @@ function mouseleaveHandler(event){
 
 function mousedownHandler(event){
 
+    console.log(canvas.width);
+    console.log(canvas.getBoundingClientRect());
     if(buildMode === 0){
-        antMap.setWall(Math.floor((mouse.x - 40) / 40) * 10, Math.floor((mouse.y - 40 ) / 40) * 10);
+        // console.log(Math.floor((mouse.x - 40) / 40) * 10, Math.floor((mouse.y - 40) / 40) * 10);
+        antMap.setWall(Math.floor((mouse.x - 40) / 40) * 10, Math.floor((mouse.y - 40) / 40) * 10);
     }
     else if(buildMode === 1){
         antMap.setFood(Math.floor((mouse.x - 40) / 20) * 5, Math.floor((mouse.y - 40) / 20) * 5);

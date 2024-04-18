@@ -80,6 +80,7 @@ body{
     transform: translate(-50%, -50%);
     /* width: calc(var(--index) * 18); */
     width: calc(200px + (600 - 200) * ((100vw - 500px) / (2560 - 500)));
+    height: calc(200px + (600 - 200) * ((100vw - 500px) / (2560 - 500)));
 }
 
 div#canvasId {

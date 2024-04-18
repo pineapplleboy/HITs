@@ -52,9 +52,9 @@ function mouseenterHandler(event){
 }
 
 function mousemoveHandler(event){
-    const rect = canvas.getBoundingClientRect()
-    mouse.x = event.clientX - rect.left
-    mouse.y = event.clientY - rect.top
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = (event.clientX - rect.left) / rect.width * 500;
+    mouse.y = (event.clientY - rect.top) / rect.height * 500;
 }
 
 function mouseleaveHandler(event){
