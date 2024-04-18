@@ -1,9 +1,10 @@
+import { startKMeans } from "./kMeans.js";
+
 document.addEventListener("DOMContentLoaded", function() {
     const kMeansButton = document.getElementById("kMeansButton");
     const DBSCANButton = document.getElementById("DBSCANButton");
     const hierarchicalButton = document.getElementById("hierarchicalButton");
     const kMeansIndexes = [];
-    const DBSCANIndexes = [];
     let flag;
     const kCanvas = document.getElementById("kCanvas");
     const usedColors = new Set();
@@ -15,14 +16,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const centroidCountInput = document.getElementById("centroidCount");
     const centroidCountDisplay = document.createElement("span");
     centroidCountDisplay.textContent = centroidCountInput.value;
-    // document.body.insertBefore(centroidCountDisplay, kCanvas);
-
-    let centroids = [];
+    //document.body.insertBefore(centroidCountDisplay, kCanvas);
 
     kCanvas.addEventListener("click", function(event) {
         const rect = kCanvas.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width * 500;
-        const y = (event.clientY - rect.top) / rect.height * 500;
+        const x = (event.clientX - rect.left) * 500 / rect.width;
+        const y = (event.clientY - rect.top) * 500 / rect.height;
         let index = kMeansIndexes.length;
         createPoint(x, y);
         pointsOfK.push({x, y});
@@ -33,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     kMeansButton.addEventListener("click", function() {
         flag = "kMeans"
-        startKMeans(flag);
+        startKMeans(flag, kMeansIndexes, centroidCountInput, pointsOfK, kCanvas, usedColors);
         usedColors.clear();
     });
 
@@ -58,38 +57,10 @@ document.addEventListener("DOMContentLoaded", function() {
         startDBSCAN(flag);
         startHierarch(flag);
         usedColors.clear();
-        startKMeans(flag);
+        startKMeans(flag, kMeansIndexes, centroidCountInput, pointsOfK, kCanvas, usedColors);
         usedColors.clear();
     });
-    function startKMeans(flag) {
-
-        centroids = kMeansPlusPlus(centroidCountInput.value);
-        let threshold = 0.1;
-        let moved = true;
-        calculateDistances();
-        while (moved) {
-            moved = false;
-
-            let oldCentroids = centroids.map(function(centroid) {
-                return { x: centroid.x, y: centroid.y };
-            });
-
-            updateCentroids();
-            moveCentroids();
-
-            centroids.forEach(function (centroid, centroidIndex) {
-                const oldCentroid = oldCentroids[centroidIndex];
-                const dx = Math.abs(centroid.x - oldCentroid.x);
-                const dy = Math.abs(centroid.y - oldCentroid.y);
-
-                if (dx > threshold || dy > threshold) {
-                    moved = true;
-                }
-            });
-        }
-        calculateDistances();
-        colorPoints(centroids,kMeansIndexes, flag);
-    }
+    
     function startDBSCAN(flag) {
         const DBSCANclusters = DBSCAN(pointsOfDBSCAN);
         colorDBSCANPoints(DBSCANclusters, flag);
@@ -97,119 +68,6 @@ document.addEventListener("DOMContentLoaded", function() {
     function startHierarch(flag){
         const HierClusters = hierarchicalClustering(pointsOfIerarch);
         colorHierarchicalClusters(HierClusters, flag);
-    }
-    function calculateDistances() {
-        pointsOfK.forEach(function(point) {
-            point.distances = [];
-            point.distances = centroids.map(function(centroid) {
-                return calculateDistance(point, centroid);
-            });
-            console.log(point.distances);
-        });
-    }
-    function colorPoints(centroids, kMeansIndexes, flag) {
-        const clusterColors = {};
-
-        centroids.forEach(function(centroid, centroidIndex) {
-            clusterColors[centroidIndex] = getRandomColor();
-        });
-
-        pointsOfK.forEach(function(point) {
-            let minDistance = Infinity;
-            let closestCentroidIndex = -1;
-
-            point.distances.forEach(function(distance, centroidIndex) {
-                if (distance < minDistance) {
-                    minDistance = distance;
-                    closestCentroidIndex = centroidIndex;
-                }
-            });
-
-            if (closestCentroidIndex !== -1) {
-                const closestCentroidColor = clusterColors[closestCentroidIndex];
-                const canvas = kCanvas;
-                const ctx = canvas.getContext("2d");
-                if (flag === "all") {
-                    ctx.fillStyle = closestCentroidColor;
-                    ctx.beginPath();
-                    ctx.arc(point.x, point.y, canvas.width / 40, Math.PI, Math.PI * 2);
-                    ctx.closePath();
-                    ctx.fill();
-                } else {
-                    ctx.fillStyle = closestCentroidColor;
-                    ctx.beginPath();
-                    ctx.arc(point.x, point.y, canvas.width / 30, 0, Math.PI * 2);
-                    ctx.closePath();
-                    ctx.fill();
-                }
-            }
-        });
-    }
-
-    function updateCentroids() {
-        centroids.forEach(function(centroid, centroidIndex) {
-            let sumX = 0;
-            let sumY = 0;
-            let count = 0;
-
-            pointsOfK.forEach(function(point) {
-                if (point.distances.indexOf(Math.min(...point.distances)) === centroidIndex) {
-                    sumX += point.x;
-                    sumY += point.y;
-                    count++;
-                }
-            });
-
-            if (count > 0) {
-                centroid.x = sumX / count;
-                centroid.y = sumY / count;
-            }
-        });
-    }
-
-    function moveCentroids() {
-        updateCentroids();
-        centroids.forEach(function(centroid) {
-            const centroidElement = document.createElement("div");
-            centroidElement.className = "centroid";
-            centroidElement.style.left = centroid.x + "px";
-            centroidElement.style.top = centroid.y + "px";
-        });
-    }
-
-    function kMeansPlusPlus(count) {
-        centroids = [];
-        const firstCentroidIndex = Math.floor(Math.random() * pointsOfK.length);
-        const firstCentroid = pointsOfK[firstCentroidIndex];
-        centroids.push(addRandomOffset(firstCentroid));
-
-        while (centroids.length < count) {
-            let maxDistSquared = -1;
-            let nextCentroid = null;
-
-            for (const point of pointsOfK) {
-                let minDistSquared = Infinity;
-
-                for (const centroid of centroids) {
-                    const distSquared = calculateDistance(point, centroid);
-                    minDistSquared = Math.min(minDistSquared, distSquared);
-                }
-
-                if (minDistSquared > maxDistSquared) {
-                    maxDistSquared = minDistSquared;
-                    nextCentroid = point;
-                }
-            }
-
-            centroids.push(addRandomOffset(nextCentroid));
-        }
-
-        return centroids;
-    }
-    function addRandomOffset(point) {
-        const offsetX = Math.random() * 10 - 5;
-        const offsetY = Math.random() * 10 - 5;
-        return { x: point.x + offsetX, y: point.y + offsetY };
     }
 
 
