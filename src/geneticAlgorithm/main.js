@@ -6,6 +6,12 @@ class Node{
     }
 }
 
+const mouse = {
+    x: 0,
+    y: 0,
+    over: false,
+}
+
 let nodes = [];
 let nodesCount = 0;
 let adjacencyMatrix = [];
@@ -13,6 +19,10 @@ let adjacencyMatrix = [];
 let lifeCycleIsActive = false;
 let geneicAlgorithmIsActive = false;
 let canvasIsEmpty = true;
+
+let mutationChance = 0.4;
+let individualsAmount = 400;
+let generationsAmount = 4000;
 
 const canvasPoints = document.getElementById("canvasPoints");
 const contextPoints = canvasPoints.getContext("2d");
@@ -22,16 +32,20 @@ const context = canvas.getContext("2d");
 canvasPoints.width = canvas.width = 500;
 canvasPoints.height = canvas.height = 500;
 
-const mouse = {
-    x: 0,
-    y: 0,
-    over: false,
-}
-
 canvas.addEventListener("mouseenter", mouseenterHandler);
 canvas.addEventListener("mousemove", mousemoveHandler);
 canvas.addEventListener("mouseleave", mouseleaveHandler);
 canvas.addEventListener("mousedown", mousedownHandler);
+
+document.getElementById("generationsAmount").addEventListener("input", updateParameters);
+document.getElementById("mutationChance").addEventListener("input", updateParameters);
+document.getElementById("individualsAmount").addEventListener("input", updateParameters);
+
+function updateParameters() {
+    individualsAmount = parseInt(document.getElementById("individualsAmount").value);
+    mutationChance= parseInt(document.getElementById("mutationChance").value) / 100;
+    generationsAmount = parseInt(document.getElementById("generationsAmount").value);
+}
 
 document.querySelector('#deleteField').onclick = function(){
 
@@ -98,8 +112,6 @@ function startGeneticAlgorithm(){
         }
     }
 
-    let individualsAmount = 400;
-
     //Создаём случайное первое поколение, сортируем и выводим лучшую особь
     let paths = [individualsAmount];
     let pathSize = [individualsAmount];
@@ -117,7 +129,7 @@ function startGeneticAlgorithm(){
     
     function animate() {
 
-        if (iteration >= 10000) {
+        if (iteration >= generationsAmount) {
             geneicAlgorithmIsActive = false;
             return;
         }
@@ -227,7 +239,7 @@ function setPathOnScreen(path){
 
 function setMutation(ind){
 
-    if(getRandomInt(0,100) < 40){
+    if(getRandomInt(0,100) < mutationChance){
 
         let firstGen = getRandomInt(1, nodesCount);
             let secondGen = getRandomInt(1, nodesCount);
