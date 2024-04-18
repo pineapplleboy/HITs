@@ -32,7 +32,7 @@ class cell{
 
         this.x = x;
         this.y = y;
-        this.ant = 1;
+        this.ant = Number(1);
 
         this.food = 0;
         this.home = false;

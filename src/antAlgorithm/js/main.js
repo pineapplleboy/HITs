@@ -37,9 +37,9 @@ canvas.addEventListener("mousedown", mousedownHandler);
 document.getElementById("antsAmount").addEventListener("input", updateParameters);
 document.getElementById("feromoneCoef").addEventListener("input", updateParameters);
 document.getElementById("antsInCellCoef").addEventListener("input", updateParameters);
-document.getElementById("foodValueCoef").addEventListener("input", updateParameters);
-document.getElementById("decreasingFeromone").addEventListener("input", updateParameters);
-document.getElementById("increasingFeromone").addEventListener("input", updateParameters);
+// document.getElementById("foodValueCoef").addEventListener("input", updateParameters);
+// document.getElementById("decreasingFeromone").addEventListener("input", updateParameters);
+// document.getElementById("increasingFeromone").addEventListener("input", updateParameters);
 document.getElementById("foodValue").addEventListener("input", updateParameters);
 document.getElementById("antStepDist").addEventListener("input", updateParameters);
 
@@ -80,12 +80,12 @@ function updateParameters() {
     for(let i = 0; i < antsAmount; ++i){
         ants[i].feromoneCoef = parseInt(document.getElementById("feromoneCoef").value);
         ants[i].antsInCellCoef = parseInt(document.getElementById("antsInCellCoef").value);
-        ants[i].foodValueCoef = parseInt(document.getElementById("foodValueCoef").value)
+        // ants[i].foodValueCoef = parseInt(document.getElementById("foodValueCoef").value)
         ants[i].antStepDist = parseInt(document.getElementById("antStepDist").value);
     }
     
-    decreasingFeromone = parseInt(document.getElementById("decreasingFeromone").value) / 100;
-    increasingFeromone = parseInt(document.getElementById("increasingFeromone").value);
+    // decreasingFeromone = parseInt(document.getElementById("decreasingFeromone").value) / 100;
+    // increasingFeromone = parseInt(document.getElementById("increasingFeromone").value);
     foodValue = parseInt(document.getElementById("foodValue").value);
 }
 
@@ -187,7 +187,7 @@ function makeSimulationStep() {
     }
 
     antMap.reduceFeromones();
-
+    
     requestAnimationFrame(makeSimulationStep);
 }
 

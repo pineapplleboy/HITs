@@ -37,14 +37,76 @@ canvas.addEventListener("mousemove", mousemoveHandler);
 canvas.addEventListener("mouseleave", mouseleaveHandler);
 canvas.addEventListener("mousedown", mousedownHandler);
 
+document.querySelector("#mutText").oninput = function() {
+    editMutText();
+}
+document.querySelector("#genText").oninput = function() {
+    editGenText();
+}
+document.querySelector("#indText").oninput = function() {
+    editIndText();
+}
+
 document.getElementById("generationsAmount").addEventListener("input", updateParameters);
 document.getElementById("mutationChance").addEventListener("input", updateParameters);
 document.getElementById("individualsAmount").addEventListener("input", updateParameters);
 
+function editMutText() {
+
+    mutationChance = document.getElementById("mutText").value;
+
+    if (mutationChance > 1) {
+        mutationChance = 1;
+        document.getElementById("mutText").value = 1;
+    }
+    else if (mutationChance < 0) {
+        mutationChance = 0;
+        document.getElementById("mutText").value = 0;
+    }
+
+    document.getElementById("mutationChance").value = mutationChance;
+}
+
+function editGenText() {
+
+    generationsAmount = document.getElementById("genText").value;
+
+    if (generationsAmount > 20000) {
+        generationsAmount = 20000;
+        document.getElementById("genText").value = 20000;
+    }
+    else if (generationsAmount < 200) {
+        generationsAmount = 200;
+        document.getElementById("genText").value = 200;
+    }
+
+    document.getElementById("generationsAmount").value = generationsAmount;
+}
+
+function editIndText() {
+
+    individualsAmount = document.getElementById("indText").value;
+
+    if (individualsAmount > 1000) {
+        individualsAmount = 1000;
+        document.getElementById("indText").value = 1000;
+    }
+    else if (mutationChance < 200) {
+        individualsAmount = 200;
+        document.getElementById("indText").value = 200;
+    }
+
+    document.getElementById("individualsAmount").value = individualsAmount;
+}
+
 function updateParameters() {
     individualsAmount = parseInt(document.getElementById("individualsAmount").value);
-    mutationChance= parseInt(document.getElementById("mutationChance").value) / 100;
+    mutationChance= document.getElementById("mutationChance").value;
     generationsAmount = parseInt(document.getElementById("generationsAmount").value);
+
+    document.getElementById("mutText").value = mutationChance;
+    document.getElementById("genText").value = generationsAmount;
+    document.getElementById("indText").value = individualsAmount;
 }
 
 document.querySelector('#deleteField').onclick = function(){
