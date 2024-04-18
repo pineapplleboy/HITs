@@ -15,7 +15,7 @@ export class Tree {
 
         this.absoluteMistakeGlobal = 0;
 
-        while (nodeStorage.length != 0) {
+        while (nodeStorage.length !== 0) {
             let currentNode = nodeStorage.shift();
 
             let newNodes = currentNode.createNewNode();
@@ -100,7 +100,7 @@ export class Tree {
                     ctx.fillText(elem.nodeInfo[0][elem.nodeInfo[0].length - 1], currentX + width / 2, currentY + height / 2 + fontSize / 2);
                 }
 
-                // if (elem.condition != undefined) {
+                // if (elem.condition !== undefined) {
                 //     ctx.textAlign = "left";
                 //     ctx.font = `${18}px Intro`;
                 //     ctx.fillText(elem.condition, currentX, currentY);
@@ -127,14 +127,14 @@ export class Tree {
 
         for (let i in levels) { // соединяем их рёбрами
 
-            if (i == 0) {
+            if (i === 0) {
                 continue;
             }
         
             for (let elem in levels[i]) {
                 
                 for (let potentialParent in levels[i - 1]) { // ищем родителя
-                    if (levels[i][elem].parent == levels[i - 1][potentialParent]) {
+                    if (levels[i][elem].parent === levels[i - 1][potentialParent]) {
 
                         let fromX = this.coordInfo[i - 1][potentialParent].x + this.coordInfo[i - 1][potentialParent].width / 2; // нижний центр вершины-родителя
                         let fromY = this.coordInfo[i - 1][potentialParent].y + this.coordInfo[i - 1][potentialParent].height; 
@@ -146,7 +146,7 @@ export class Tree {
 
                         ctx.lineTo(toX, toY);
                         
-                        if (levels[i][elem].condition.split(" ")[0] != "<=" && levels[i][elem].condition.split(" ")[0] != ">") { // берём только первое слово из условия
+                        if (levels[i][elem].condition.split(" ")[0] !== "<=" && levels[i][elem].condition.split(" ")[0] !== ">") { // берём только первое слово из условия
 
                             ctx.font = `${Math.min((this.coordInfo[i][elem].width + 20) / Math.max(levels[i][elem].condition.split(" ")[0].length, 5), 20)}px Intro`;
                             ctx.fillText(levels[i][elem].condition.split(" ")[0], (fromX + toX) / 2, (fromY + toY) / 2); // дописываем условие 
@@ -186,7 +186,7 @@ export class Tree {
 
         ctx.beginPath();
 
-        while (currentNode.child.length != 0) { // проходимся по дереву
+        while (currentNode.child.length !== 0) { // проходимся по дереву
 
             let currentAtribute = elementInfo[currentNode.nodeCategories.indexOf(currentNode.title)];
 
@@ -194,7 +194,7 @@ export class Tree {
             
             for (let elem of currentNode.child) { // ищем, куда переходим
 
-                if (elem.condition.split(" ").length == 2 && elem.condition.split(" ")[0] == ">"
+                if (elem.condition.split(" ").length === 2 && elem.condition.split(" ")[0] === ">"
                  && isDigit(currentAtribute[0])) {
                     
                     if (Number(currentAtribute) > Number(elem.condition.split(" ")[1])) {
@@ -204,7 +204,7 @@ export class Tree {
                     
                 }
 
-                else if (elem.condition.split(" ").length == 2 && elem.condition.split(" ")[0] == "<="
+                else if (elem.condition.split(" ").length === 2 && elem.condition.split(" ")[0] === "<="
                 && isDigit(currentAtribute[0])) {
 
                     if (Number(currentAtribute) <= Number(elem.condition.split(" ")[1])) {
@@ -213,14 +213,14 @@ export class Tree {
                     }
                 }
 
-                else if (elem.condition.toLowerCase() == currentAtribute.toLowerCase()){
+                else if (elem.condition.toLowerCase() === currentAtribute.toLowerCase()){
                     isFound = currentNode.child.indexOf(elem);
                     currentCoords = this.coordInfo[layIndex + 1][this.getAllLevels()[layIndex + 1].indexOf(elem)];
                 }
 
             }
 
-            if (isFound == -1) {
+            if (isFound === -1) {
                 isFound = 2;
                 alert("Не могу...");
                 break;
@@ -236,7 +236,7 @@ export class Tree {
             usedCoords.push(currentCoords);
         }
 
-        if (isFound != -1) {
+        if (isFound !== -1) {
             currentCoords = this.coordInfo[0][0]; // красим корень
             ctx.strokeRect(currentCoords.x, currentCoords.y, currentCoords.width, currentCoords.height);
 
@@ -291,7 +291,7 @@ export class Tree {
 
                 // на столько изменятсся эти параметры, если заменить все отличающиеся варианты на "основные"
 
-                if (positive == 0 || negative == 0) {
+                if (positive === 0 || negative === 0) {
                     continue;
                 }
 

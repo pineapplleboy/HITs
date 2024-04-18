@@ -66,3 +66,27 @@ dialog::backdrop {
 .closeButton:active {
     background-color: rgb(196, 13, 13);
 }
+
+.back-button {
+    position: absolute;
+    left: 5%;
+    top: 5%;
+    transform: (-5%, -5%);
+
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+
+    background-color: rgb(25, 109, 134);
+
+    font-size: large;
+}
+
+.back-button:hover {
+    background-color: rgb(43, 172, 211);
+    box-shadow: 0 0 0 2px white;
+}
+
+.back-button:active {
+    background-color: rgb(33, 192, 240);
+}
