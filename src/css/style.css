@@ -98,6 +98,10 @@ div#canvasId {
     transform: translate(-50%, -50%);
 }
 
+/* div#canvasId > canvas {
+    width: 34vw;
+} */
+
 .blob{
     position: absolute;
 }
