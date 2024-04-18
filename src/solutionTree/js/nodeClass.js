@@ -18,8 +18,8 @@ export class Node {
         let negative = 0;
 
         for (let i = 0; i < this.nodeInfo.length; i++) {
-            if (this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() == "true" ||
-             this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() == "yes" || this.nodeInfo[i][this.nodeInfo[i].length - 1] == "1") {
+            if (this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() === "true" ||
+             this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() === "yes" || this.nodeInfo[i][this.nodeInfo[i].length - 1] == "1") {
                 positive++;
              }
              else {
@@ -76,14 +76,14 @@ export class Node {
         let entropyMap = new Map();
 
         // если варианты - не числа, то проводим обычный анализ, иначе - анализ по больше/меньше одному из чисел
-        if (digitCond == -1) {
+        if (digitCond === -1) {
             for (let i = 0; i < this.nodeInfo.length; i++) { // считаем количество "да" и "нет" для параметров
                 if (!allVar.has(this.nodeInfo[i][entropyIndex])) {
                     allVar.set(this.nodeInfo[i][entropyIndex], [0, 0]); // первый элемент в массиве - да, второй элемент - нет
                 }
     
-                if (this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() == "true" ||
-                 this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() == "yes" || this.nodeInfo[i][this.nodeInfo[i].length - 1] == "1") {
+                if (this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() === "true" ||
+                 this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() === "yes" || this.nodeInfo[i][this.nodeInfo[i].length - 1] == "1") {
     
                     allVar.set(this.nodeInfo[i][entropyIndex], [allVar.get(this.nodeInfo[i][entropyIndex])[0] + 1,
                      allVar.get(this.nodeInfo[i][entropyIndex])[1]]);
@@ -117,8 +117,8 @@ export class Node {
 
             for (let i = 0; i < this.nodeInfo.length; i++) { // считаем количество "да" и "нет" для >/<= числу
 
-                if (this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() == "true" ||
-                 this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() == "yes" || this.nodeInfo[i][this.nodeInfo[i].length - 1] == "1") {
+                if (this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() === "true" ||
+                 this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() === "yes" || this.nodeInfo[i][this.nodeInfo[i].length - 1] == "1") {
                     
                     if (Number(this.nodeInfo[i][entropyIndex]) > Number(digitCond)) {
                         allVar.set(`> ${digitCond}`, [allVar.get(`> ${digitCond}`)[0] + 1,
@@ -184,7 +184,7 @@ export class Node {
                 let tempCond = this.nodeCategories[i];
 
                 for (let j = 0; j < categories.length; j++) {
-                    if (categories[j] == tempCond) {
+                    if (categories[j] === tempCond) {
                         for (let iter = 0; iter < allInfo.length; iter++) {
                             allGlobVar.push(allInfo[iter][j]);
                         }
@@ -218,7 +218,7 @@ export class Node {
         let bestInd = 0;
 
         for (let i = 1; i < allOptions.length; i++) {
-            //if (allOptions[i][1] > allOptions[bestInd][1] && allOptions[i][1] != 1) {
+            //if (allOptions[i][1] > allOptions[bestInd][1] && allOptions[i][1] !== 1) {
             if (allOptions[i][1] > allOptions[bestInd][1]) {
                 bestInd = i;
             }
@@ -242,7 +242,7 @@ export class Node {
         // сначала удаляем из списков вариантов лучшую категорию
         for (let i = 0; i < clearedNodeCategories.length; i++) {
 
-            if (clearedNodeCategories[i] == bestOption[0]) {
+            if (clearedNodeCategories[i] === bestOption[0]) {
                 deleteInd = i;
                 clearedNodeCategories.splice(i, 1);
                 break;
@@ -267,7 +267,7 @@ export class Node {
             newNode.parent = this;
 
             if (bestOption.length > 1) {
-                if (conditionVariant == `> ${bestOption[1]}`) {
+                if (conditionVariant === `> ${bestOption[1]}`) {
                     for (let i = 0; i < this.nodeInfo.length; i++) {
                         if (this.nodeInfo[i][deleteInd] > bestOption[1]) {
                             newNodeInfo.push(this.nodeInfo[i].map((element) => element));
@@ -290,7 +290,7 @@ export class Node {
 
                 for (let i = 0; i < this.nodeInfo.length; i++) {
 
-                    if (this.nodeInfo[i][deleteInd] == conditionVariant) {
+                    if (this.nodeInfo[i][deleteInd] === conditionVariant) {
                         newNodeInfo.push(this.nodeInfo[i].map((element) => element));
                         newNodeInfo[newNodeInfo.length - 1].splice(deleteInd, 1);
                     }
@@ -309,20 +309,20 @@ export class Node {
 
     // проверка, нужно ли создавать новые узлы
     checkIsNodeLeaf() {
-        if (this.nodeInfo[0].length == 1) {
+        if (this.nodeInfo[0].length === 1) {
             //this.title = this.nodeInfo[0][0];
             return false;
         }
 
         let positive = 0;
         for (let i = 0; i < this.nodeInfo.length; i++) {
-            if (this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() == "true" ||
-             this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() == "yes" || this.nodeInfo[i][this.nodeInfo[i].length - 1] == "1") {
+            if (this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() === "true" ||
+             this.nodeInfo[i][this.nodeInfo[i].length - 1].toLowerCase() === "yes" || this.nodeInfo[i][this.nodeInfo[i].length - 1] == "1") {
                 positive++;
             }
         }
 
-        if (positive != this.nodeInfo.length && positive > 0) {
+        if (positive !== this.nodeInfo.length && positive > 0) {
             return true;
         }
 

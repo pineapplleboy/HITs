@@ -24,20 +24,20 @@ export class Maze {
             for (let j = 0; j < this.mazeSize; j++) {
                 let tempArray = new Array();
 
-                if (this.mazeMap[i][j] != -1) {
-                    if (i != 0 && this.mazeMap[i - 1][j] >= 0) { // клетка сверху
+                if (this.mazeMap[i][j] !== -1) {
+                    if (i !== 0 && this.mazeMap[i - 1][j] >= 0) { // клетка сверху
                         tempArray.push((i - 1) * this.mazeSize + j);
                     }
     
-                    if (j != 0 && this.mazeMap[i][j - 1] >= 0) { // клетка слева
+                    if (j !== 0 && this.mazeMap[i][j - 1] >= 0) { // клетка слева
                         tempArray.push(i* this.mazeSize + j - 1);
                     }
     
-                    if (j != this.mazeSize - 1 && this.mazeMap[i][j + 1] >= 0) { // клетка справа
+                    if (j !== this.mazeSize - 1 && this.mazeMap[i][j + 1] >= 0) { // клетка справа
                         tempArray.push(i * this.mazeSize + j + 1);
                     }
     
-                    if (i != this.mazeSize - 1 && this.mazeMap[i + 1][j] >= 0) { // клетка снизу
+                    if (i !== this.mazeSize - 1 && this.mazeMap[i + 1][j] >= 0) { // клетка снизу
                         tempArray.push((i + 1) * this.mazeSize + j);
                     }
                 }
@@ -66,7 +66,7 @@ export class Maze {
     clearMaze() {
         for (let i = 0; i < this.mazeSize; i++) {
             for (let j = 0; j < this.mazeSize; j++) {
-                if (i * this.mazeSize + j != this.startCell && i * this.mazeSize + j != this.finishCell) {
+                if (i * this.mazeSize + j !== this.startCell && i * this.mazeSize + j !== this.finishCell) {
                     this.mazeMap[i][j] = 0;
                     const currentMazeCell = document.getElementById(`mazeCell${i * this.mazeSize + j}`);
                     currentMazeCell.style.background = "white";
@@ -80,7 +80,7 @@ export class Maze {
     clearAlg() {
         for (let i = 0; i < this.mazeSize; i++) {
             for (let j = 0; j < this.mazeSize; j++) {
-                if (i * this.mazeSize + j != this.startCell && i * this.mazeSize + j != this.startCell && this.mazeMap[i][j] > 0) {
+                if (i * this.mazeSize + j !== this.startCell && i * this.mazeSize + j !== this.startCell && this.mazeMap[i][j] > 0) {
                     this.mazeMap[i][j] = 0;
                     this.paintCellBack(i * this.mazeSize + j);
                 }
@@ -90,7 +90,7 @@ export class Maze {
 
     // ставит стартовую точку в ячейку number
     setStartCell(number) {
-        if (number != this.finishCell) {
+        if (number !== this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${this.startCell}`);
             currentMazeCell.style.background = "white";
     
@@ -103,7 +103,7 @@ export class Maze {
 
     // ставит конечную точку в ячейку number
     setFinishCell(number) {
-        if (number != this.startCell) {
+        if (number !== this.startCell) {
             const currentMazeCell = document.getElementById(`mazeCell${this.finishCell}`);
             currentMazeCell.style.background = "white";
     
@@ -118,13 +118,13 @@ export class Maze {
     setWall(number) { // пока что без именения списка ребёр
         const x = number % this.mazeSize;
         const y = Math.floor(number / this.mazeSize);
-        if (number != this.startCell && number != this.finishCell && this.mazeMap[y][x] >= 0) { // если клетка пустая, ставит стену
+        if (number !== this.startCell && number !== this.finishCell && this.mazeMap[y][x] >= 0) { // если клетка пустая, ставит стену
             this.mazeMap[y][x] = -1;
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
             currentMazeCell.style.background = "black";
             currentMazeCell.style.borderColor = "gray";  
         }
-        else if (this.mazeMap[y][x] == -1) { // если занята, убирает стену
+        else if (this.mazeMap[y][x] === -1) { // если занята, убирает стену
             this.mazeMap[y][x] = 0;
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
             currentMazeCell.style.background = "white";
@@ -139,18 +139,7 @@ export class Maze {
     getCellCode(number) {
         const ratio = window.devicePixelRatio; // масштабирование монитора)
 
-        console.log(ratio);
-
-        let cellSize;
-        if (ratio == 1) { // для разного масштабирования разные размеры
-            cellSize = (400 - this.mazeSize * 2) / this.mazeSize;
-        }
-        else if (ratio == 1.25) {
-            cellSize = (400 - this.mazeSize * 1.6) / this.mazeSize;
-        }
-        else {
-            cellSize = (400 - this.mazeSize * (2 / ratio)) / this.mazeSize;
-        }
+        let cellSize = (400 - this.mazeSize * (2 / ratio)) / this.mazeSize;
 
         let code = `<div style='display: flex;'>`; // элементы в одной строчке
         for (let i = 0; i < this.mazeSize; i++) {
@@ -160,8 +149,15 @@ export class Maze {
             
             // onmousedown позволяет больше "спамить" нажатиями (лучше, чем onclick)
 
+            // let cellCode = `<img id='${cellId}' src="./img/wall.png"
+            // style='display: inline-block; width: ${cellSize}px; height: ${cellSize}px; cursor: ${cursorType}'>`;
+
+            // let cellCode = `<div id='${cellId}'
+            // style='display: inline-block; width: ${cellSize}px; height: ${cellSize}px; cursor: ${cursorType}'></div>`;
+
+            // переводим размер в пикселях в размер в vh/vw
             let cellCode = `<div id='${cellId}'
-            style='display: inline-block; width: ${cellSize}px; height: ${cellSize}px; cursor: ${cursorType}'></div>`;
+            style='display: inline-block; width: ${(cellSize / window.innerWidth) * 100}vw; height: ${(cellSize / window.innerHeight) * 100}vh; cursor: ${cursorType}'></div>`;
 
             // добавляем характеристики клетки + возможность кликнуть на неё
             code += cellCode;
@@ -182,7 +178,25 @@ export class Maze {
 
             for (let j = 0; j < this.mazeSize; j++) {
                 let elem = document.getElementById(`mazeCell${i * this.mazeSize + j}`);
-                elem.style.background = 'white';
+
+                if (this.mazeMap[i][j] === -1) { // чекаем, какая клетка была до этого (это для перестроения между экранами)
+                    console.log('aa');
+                    elem.style.background = 'black';
+                }
+                else if (this.mazeMap[i][j] === 0) {
+                    elem.style.background = 'white';
+                }
+                else if (this.mazeMap[i][j] === 1) {
+                    elem.style.background = 'gray';
+                }
+                else if (this.mazeMap[i][j] === 2) {
+                    elem.style.background = 'yellow';
+                }
+                else if (this.mazeMap[i][j] === 3) {
+                    elem.style.background = 'gold';
+                }
+
+                //elem.style.background = 'white';
                 elem.style.padding = 0;
                 elem.style.borderWidth = 1;
                 elem.style.borderColor = 'gray';
@@ -213,7 +227,7 @@ export class Maze {
 
     // окрашивает клетку в розовый
     paintPinkCell(number) {
-        if (number != this.startCell && number != this.finishCell) {
+        if (number !== this.startCell && number !== this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
             currentMazeCell.style.background = "pink";
             currentMazeCell.style.borderColor = "gray";
@@ -222,33 +236,33 @@ export class Maze {
 
     // окрашивает клетку обратно в её изначальный цвет
     paintCellBack(number) {
-        if (number != this.startCell && number != this.finishCell) {
+        if (number !== this.startCell && number !== this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
-            if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] == -1) {
+            if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] === -1) {
                 currentMazeCell.style.background = "black";
                 currentMazeCell.style.borderColor = "gray";
             }
-            else if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] == 0) {
+            else if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] === 0) {
                 currentMazeCell.style.background = "white";
                 currentMazeCell.style.borderColor = "gray";
             }
-            else if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] == 1) {
+            else if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] === 1) {
                 currentMazeCell.style.background = "gray";
             }
-            else if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] == 2) {
+            else if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] === 2) {
                 currentMazeCell.style.background = "yellow";
             }
-            else if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] == 3) {
+            else if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] === 3) {
                 currentMazeCell.style.background = "gold";
             }
         }
     }
 
-    // генерация карты
+    // генерация карты (https://habr.com/ru/articles/537630/)
     generateMap() { // здесь мы не строим стены, а как бы прорываем тоннели
         for (let i = 0; i < this.mazeSize; i++) {
             for (let j = 0; j < this.mazeSize; j++) {
-                if (i * this.mazeSize + j != this.startCell && i * this.mazeSize + j != this.finishCell) {
+                if (i * this.mazeSize + j !== this.startCell && i * this.mazeSize + j !== this.finishCell) {
                     this.setWall(i * this.mazeSize + j);
                 }
             }
@@ -295,22 +309,22 @@ export class Maze {
             }
 
             if (currentCellNumber - 2 * this.mazeSize >= 0 && 
-                this.mazeMap[Math.floor((currentCellNumber - 2 * this.mazeSize) / this.mazeSize)][(currentCellNumber - 2 * this.mazeSize) % this.mazeSize] == -1
+                this.mazeMap[Math.floor((currentCellNumber - 2 * this.mazeSize) / this.mazeSize)][(currentCellNumber - 2 * this.mazeSize) % this.mazeSize] === -1
                 && !toCheck.includes(currentCellNumber - 2 * this.mazeSize)) { // через одну клетку сверху
                 toCheck.push(currentCellNumber - 2 * this.mazeSize);
             }
             if (currentCellNumber + 2 * this.mazeSize <= this.mazeSize * this.mazeSize - 1 && 
-                this.mazeMap[Math.floor((currentCellNumber + 2 * this.mazeSize) / this.mazeSize)][(currentCellNumber + 2 * this.mazeSize) % this.mazeSize] == -1
+                this.mazeMap[Math.floor((currentCellNumber + 2 * this.mazeSize) / this.mazeSize)][(currentCellNumber + 2 * this.mazeSize) % this.mazeSize] === -1
                 && !toCheck.includes(currentCellNumber + 2 * this.mazeSize)) { // через одну клетку снизу
                 toCheck.push(currentCellNumber + 2 * this.mazeSize);
             }
             if (currentCellNumber - 2 >= 0 && 
-                this.mazeMap[Math.floor((currentCellNumber - 2) / this.mazeSize)][(currentCellNumber - 2) % this.mazeSize] == -1
+                this.mazeMap[Math.floor((currentCellNumber - 2) / this.mazeSize)][(currentCellNumber - 2) % this.mazeSize] === -1
                 && !toCheck.includes(currentCellNumber - 2)) { // через одну клетку слева
                 toCheck.push(currentCellNumber - 2);
             }
             if (currentCellNumber + 2 <= this.mazeSize * this.mazeSize - 1 && 
-                this.mazeMap[Math.floor((currentCellNumber + 2) / this.mazeSize)][(currentCellNumber + 2) % this.mazeSize] == -1
+                this.mazeMap[Math.floor((currentCellNumber + 2) / this.mazeSize)][(currentCellNumber + 2) % this.mazeSize] === -1
                 && !toCheck.includes(currentCellNumber + 2)) { // через одну клетку справа
                 toCheck.push(currentCellNumber + 2);
             }
@@ -321,27 +335,27 @@ export class Maze {
 
             for (let i = 0; i < this.mazeSize; i++) {
                 for (let j = 0; j < this.mazeSize; j++) {
-                    if (this.mazeMap[i][j] == -1) continue;
+                    if (this.mazeMap[i][j] === -1) continue;
 
                     let neighbours = new Array();
 
-                    if (i > 0 && this.mazeMap[i - 1][j] == -1) {
+                    if (i > 0 && this.mazeMap[i - 1][j] === -1) {
                         neighbours.push((i - 1) * this.mazeSize + j);
                     }
 
-                    if (i < this.mazeSize - 1 && this.mazeMap[i + 1][j] == -1) {
+                    if (i < this.mazeSize - 1 && this.mazeMap[i + 1][j] === -1) {
                         neighbours.push((i + 1) * this.mazeSize + j);
                     }
 
-                    if (j > 0 && this.mazeMap[i][j - 1] == -1) {
+                    if (j > 0 && this.mazeMap[i][j - 1] === -1) {
                         neighbours.push(i* this.mazeSize + j - 1);
                     }
 
-                    if (j < this.mazeSize - 1 && this.mazeMap[i][j + 1] == -1) {
+                    if (j < this.mazeSize - 1 && this.mazeMap[i][j + 1] === -1) {
                         neighbours.push(i* this.mazeSize + j + 1);
                     }
 
-                    if (neighbours.length >= 3 - (i == 0 || i == this.mazeSize - 1) - (j == 0 || j == this.mazeSize - 1)) {
+                    if (neighbours.length >= 3 - (i === 0 || i === this.mazeSize - 1) - (j === 0 || j === this.mazeSize - 1)) {
                         let index = Math.floor(Math.random() * neighbours.length);
                         const currentCellNumber = neighbours[index];
                         this.setWall(currentCellNumber);
@@ -395,41 +409,41 @@ export class Maze {
             cameFrom.set(startMazeCell + 2, startMazeCell);
         }
         
-        while (queue.size() != 0) {
+        while (queue.size() !== 0) {
             let currentCell = queue.getElem();
 
             let cameFromCell = cameFrom.get(currentCell);
-            if (this.mazeMap[Math.floor(((cameFromCell + currentCell) / 2) / this.mazeSize)][((cameFromCell + currentCell) / 2) % this.mazeSize] == -1) {
+            if (this.mazeMap[Math.floor(((cameFromCell + currentCell) / 2) / this.mazeSize)][((cameFromCell + currentCell) / 2) % this.mazeSize] === -1) {
                 this.setWall((cameFromCell + currentCell) / 2);
             }
             
-            if (currentCell - 2 * this.mazeSize >= 0 && (this.mazeMap[Math.floor((currentCell - 2 * this.mazeSize) / this.mazeSize)][(currentCell - 2 * this.mazeSize) % this.mazeSize] == -1
-            || currentCell - 2 * this.mazeSize == this.finishCell || currentCell - 2 * this.mazeSize == this.startCell)) {
+            if (currentCell - 2 * this.mazeSize >= 0 && (this.mazeMap[Math.floor((currentCell - 2 * this.mazeSize) / this.mazeSize)][(currentCell - 2 * this.mazeSize) % this.mazeSize] === -1
+            || currentCell - 2 * this.mazeSize === this.finishCell || currentCell - 2 * this.mazeSize === this.startCell)) {
                 queue.addElem(currentCell - 2 * this.mazeSize, weightMatrix[Math.floor((currentCell - 2 * this.mazeSize) / this.mazeSize)][(currentCell - 2 * this.mazeSize) % this.mazeSize]);
                 this.setWall(currentCell - 2 * this.mazeSize);
                 cameFrom.set(currentCell - 2 * this.mazeSize, currentCell);
             }
-            if (currentCell + 2 * Number(this.mazeSize) <= this.mazeSize * this.mazeSize - 1 && (this.mazeMap[Math.floor((currentCell + 2 * Number(this.mazeSize)) / this.mazeSize)][(currentCell + 2 * Number(this.mazeSize)) % this.mazeSize] == -1
-            || currentCell + 2 * Number(this.mazeSize) == this.finishCell || currentCell + 2 * Number(this.mazeSize) == this.startCell)) {
+            if (currentCell + 2 * Number(this.mazeSize) <= this.mazeSize * this.mazeSize - 1 && (this.mazeMap[Math.floor((currentCell + 2 * Number(this.mazeSize)) / this.mazeSize)][(currentCell + 2 * Number(this.mazeSize)) % this.mazeSize] === -1
+            || currentCell + 2 * Number(this.mazeSize) === this.finishCell || currentCell + 2 * Number(this.mazeSize) === this.startCell)) {
                 queue.addElem(currentCell + 2 * Number(this.mazeSize), weightMatrix[Math.floor((currentCell + 2 * Number(this.mazeSize)) / this.mazeSize)][(currentCell + 2 * Number(this.mazeSize)) % this.mazeSize]);
                 this.setWall(currentCell + 2 * Number(this.mazeSize));
                 cameFrom.set(currentCell + 2 * Number(this.mazeSize), currentCell);
             }
-            if (currentCell % this.mazeSize - 2 >= 0 && (this.mazeMap[Math.floor((currentCell - 2) / this.mazeSize)][(currentCell - 2) % this.mazeSize] == -1 
-            || currentCell - 2 == this.finishCell || currentCell - 2 == this.startCell)) {
+            if (currentCell % this.mazeSize - 2 >= 0 && (this.mazeMap[Math.floor((currentCell - 2) / this.mazeSize)][(currentCell - 2) % this.mazeSize] === -1 
+            || currentCell - 2 === this.finishCell || currentCell - 2 === this.startCell)) {
                 queue.addElem(currentCell - 2 , weightMatrix[Math.floor((currentCell - 2) / this.mazeSize)][(currentCell - 2) % this.mazeSize]);
                 this.setWall(currentCell - 2);
                 cameFrom.set(currentCell - 2, currentCell);
             }
-            if (currentCell % this.mazeSize + 2 < this.mazeSize && (this.mazeMap[Math.floor((currentCell + 2) / this.mazeSize)][(currentCell + 2) % this.mazeSize] == -1 
-            || currentCell + 2 == this.finishCell || currentCell + 2 == this.startCell)) {
+            if (currentCell % this.mazeSize + 2 < this.mazeSize && (this.mazeMap[Math.floor((currentCell + 2) / this.mazeSize)][(currentCell + 2) % this.mazeSize] === -1 
+            || currentCell + 2 === this.finishCell || currentCell + 2 === this.startCell)) {
                 queue.addElem(currentCell + 2, weightMatrix[Math.floor((currentCell + 2) / this.mazeSize)][(currentCell + 2) % this.mazeSize]);
                 this.setWall(currentCell + 2);
                 cameFrom.set(currentCell + 2, currentCell);
             }
         }
 
-        if (this.mazeSize % 2 == 0) { // удаляем стенки, которые остались по краям
+        if (this.mazeSize % 2 === 0) { // удаляем стенки, которые остались по краям
             let clearNearFinish = new Array();
             
             for (let i = 0; i < this.mazeSize; i++) {
@@ -437,7 +451,7 @@ export class Maze {
                 let currentCellVert = this.mazeSize * (i + 1) - 1;
 
                 if (currentCellVert === this.finishCell && 
-                    this.mazeMap[Math.floor((currentCellVert - this.mazeSize) / this.mazeSize)][(currentCellVert - this.mazeSize) % this.mazeSize] == -1) {
+                    this.mazeMap[Math.floor((currentCellVert - this.mazeSize) / this.mazeSize)][(currentCellVert - this.mazeSize) % this.mazeSize] === -1) {
                         clearNearFinish.push(currentCellVert - this.mazeSize);
                 }
                 else if (Math.floor(Math.random() * 2) && this.mazeMap[Math.floor((currentCellVert - 1) / this.mazeSize)][(currentCellVert - 1) % this.mazeSize] >= 0) {
@@ -447,8 +461,8 @@ export class Maze {
                 let currentCellHor = this.mazeSize * (this.mazeSize - 1) + i;
 
 
-                if (currentCellHor == this.finishCell && 
-                    this.mazeMap[Math.floor((currentCellHor - 1) / this.mazeSize)][(currentCellHor - 1) % this.mazeSize] == -1) {
+                if (currentCellHor === this.finishCell && 
+                    this.mazeMap[Math.floor((currentCellHor - 1) / this.mazeSize)][(currentCellHor - 1) % this.mazeSize] === -1) {
                     clearNearFinish.push(currentCellHor - 1);
                 }
                 else if (Math.floor(Math.random() * 2) && 
@@ -460,7 +474,7 @@ export class Maze {
             }
 
             // проверка, заняты ли соседние стены
-            if (clearNearFinish.length == 2) {
+            if (clearNearFinish.length === 2) {
                 const index = Math.floor(Math.random() * clearNearFinish.length);
                 this.setWall(clearNearFinish[index]);
             }
@@ -470,7 +484,7 @@ export class Maze {
 
     // окрашивает клетку из очереди
     wallIsGettingReady(number) {
-        if (number != this.startCell && number != this.finishCell) {
+        if (number !== this.startCell && number !== this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
             this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] = 1;
             currentMazeCell.style.background = "gray";
@@ -479,7 +493,7 @@ export class Maze {
 
     // окрашивает уже просмотренную клетку
     wallIsReviewed(number) {
-        if (number != this.startCell && number != this.finishCell) {
+        if (number !== this.startCell && number !== this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
             this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] = 2;
             currentMazeCell.style.background = "yellow";
@@ -488,7 +502,7 @@ export class Maze {
 
     // окрашивает клетку, являющуюся частью пути
     wallIsPartOfTheWay(number) {
-        if (number != this.startCell && number != this.finishCell) {
+        if (number !== this.startCell && number !== this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
             this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] = 3;
             currentMazeCell.style.background = "gold";
@@ -501,10 +515,10 @@ export class Maze {
             return;
         }
 
-        if (this.buildingMode == 0) {
+        if (this.buildingMode === 0) {
             this.setWall(number);
         }
-        else if (this.buildingMode == 1) {
+        else if (this.buildingMode === 1) {
             this.setStartCell(number);
         }
         else {
@@ -515,7 +529,7 @@ export class Maze {
 
     // проверяет, нажата ли кнопка мыши
     checkMouseButton(number) {
-        if (isMouseDown && this.buildingMode == 0 && !this.running) {
+        if (isMouseDown && this.buildingMode === 0 && !this.running) {
             this.setWall(number);
         }
         else {
@@ -576,7 +590,7 @@ export class Maze {
             if (queue.size() > 0 && !maze.pause) {
                 let currentNode = queue.getElem();
             
-                if (currentNode == maze.finishCell) {
+                if (currentNode === maze.finishCell) {
                     succes = true;
                     clearInterval(IntervalId);
                 }
@@ -623,7 +637,7 @@ export class Maze {
                     }
 
                     if (!maze.pause) {
-                        if (wayCell == maze.startCell) {
+                        if (wayCell === maze.startCell) {
                             for (let elem of elements) { // разблокируем все элементы
                                 document.getElementById(elem).disabled = false;
                             }
@@ -638,7 +652,7 @@ export class Maze {
                     }
                 }, 100 - maze.animationSpeed)
             }
-            else if (queue.size() == 0) {
+            else if (queue.size() === 0) {
                 for (let elem of elements) { // разблокируем все элементы
                     document.getElementById(elem).disabled = false;
                 }

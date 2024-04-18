@@ -20,7 +20,7 @@ function handleFiles() {
   if (fileList.length) {
     const currentFile = fileList[0];
 
-    if (currentFile.name.split(".")[currentFile.name.split(".").length - 1] != "csv") {
+    if (currentFile.name.split(".")[currentFile.name.split(".").length - 1] !== "csv") {
         alert("Это не csv!!");
     }
 
@@ -35,7 +35,7 @@ function handleFiles() {
         categories = new Array();
 
         for (let i = 0; i < CSVData.length - 1; i++) {
-            if (i == 0) {
+            if (i === 0) {
                 categories.push(CSVData[i].split(";"));
             }
             else {
@@ -44,10 +44,6 @@ function handleFiles() {
         }
 
         categories = categories[0];
-
-        // const textField = document.getElementById("categoriesReminder"); // вставляем текст с категориями из файла
-        // textField.innerHTML = "";
-        // textField.innerHTML = categories.slice(0, categories.length - 1).join(";");
 
         document.getElementById('newElementInput').placeholder = categories.slice(0, categories.length - 1).join(";");
 
@@ -100,10 +96,10 @@ document.querySelector("#absoluteGlobalRangeText").oninput = function() {
 }
 
 addEventListener("keydown", function(event) { // увеличение и уменьшении канваса на +/-
-    if (event.key == "=" && !event.ctrlKey) {
+    if (event.key === "=" && !event.ctrlKey) {
         resizeCanvas(50);
     }
-    else if (event.key == "-" && !event.ctrlKey) {
+    else if (event.key === "-" && !event.ctrlKey) {
         resizeCanvas(-50);
     }
     

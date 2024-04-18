@@ -1,3 +1,7 @@
+if (window.sessionStorage.length <= 1) {
+    window.sessionStorage.setItem('slide', 0);
+}
+
 const swiperText = new Swiper(".swiper", {
     speed: 1500,
     mousewheel: {},
@@ -8,10 +12,15 @@ const swiperText = new Swiper(".swiper", {
     navigation: {
         prevEl: '.swiper-button-prev',
         nextEl: '.swiper-button-next'
-    }
+    },
+    initialSlide: window.sessionStorage.getItem('slide')
 });
 
 const video = document.querySelector('.video-background');
+
+video.currentTime = window.sessionStorage.getItem('slide');
+
+window.sessionStorage.setItem('slide', 0);
 
 swiperText.on('slideChange', function() {
     gsap.to(video, 0.7, {
