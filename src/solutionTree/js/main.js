@@ -45,9 +45,11 @@ function handleFiles() {
 
         categories = categories[0];
 
-        const textField = document.getElementById("categoriesReminder"); // вставляем текст с категориями из файла
-        textField.innerHTML = "";
-        textField.innerHTML = categories.slice(0, categories.length - 1).join(";");
+        // const textField = document.getElementById("categoriesReminder"); // вставляем текст с категориями из файла
+        // textField.innerHTML = "";
+        // textField.innerHTML = categories.slice(0, categories.length - 1).join(";");
+
+        document.getElementById('newElementInput').placeholder = categories.slice(0, categories.length - 1).join(";");
 
         reloadInputText(currentFile.name);
     }
@@ -122,36 +124,6 @@ function goAlgClick() { // алгоритм C4.5
         tree.printTree();
     }
     
-}
-
-
-let listBlock = document.querySelector("#listId");
-
-let textListBlock = document.getElementById("selectId");
-
-document.querySelector("#selectId").onclick = function() {
-
-    if (listBlock.hidden) {
-        listBlock.hidden = false;
-    }
-    else {
-        listBlock.hidden = true;
-    }
-}
-
-document.querySelector("#firstVariant").onclick = function() {
-    listBlock.hidden = true;
-    textListBlock.textContent = "Режим строительства: стены";
-}
-
-document.querySelector("#secondVariant").onclick = function() {
-    listBlock.hidden = true;
-    textListBlock.textContent = "Режим строительства: старт";
-}
-
-document.querySelector("#thirdVariant").onclick = function() {
-    listBlock.hidden = true;
-    textListBlock.textContent = "Режим строительства: финиш";
 }
 
 const dialog = document.querySelector("dialog");

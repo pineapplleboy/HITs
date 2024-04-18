@@ -141,11 +141,11 @@ export class Tree {
 
                         let toX = this.coordInfo[i][elem].x + this.coordInfo[i][elem].width / 2; // верхний центр узла
                         let toY = this.coordInfo[i][elem].y;
-                        
+
                         ctx.moveTo(fromX, fromY); // рисуем линию
 
                         ctx.lineTo(toX, toY);
-
+                        
                         if (levels[i][elem].condition.split(" ")[0] != "<=" && levels[i][elem].condition.split(" ")[0] != ">") { // берём только первое слово из условия
 
                             ctx.font = `${Math.min((this.coordInfo[i][elem].width + 20) / Math.max(levels[i][elem].condition.split(" ")[0].length, 5), 20)}px Intro`;
@@ -157,7 +157,7 @@ export class Tree {
                             ctx.font = `${Math.min((this.coordInfo[i][elem].width + 20) / levels[i][elem].condition.length, 20)}px Intro`;
                             ctx.fillText(levels[i][elem].condition, (fromX + toX) / 2, (fromY + toY) / 2); // дописываем условие 
                         }
-                        
+       
                     }
                 }
             }

@@ -22,13 +22,13 @@
     background-color: rgb(33, 192, 240);
 }
 
-dialog {
+dialog{
     text-align: center;
     border-radius: 10px;
     position: fixed;
-    top: 50%;
+    /* top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
 
 dialog::backdrop {

@@ -137,7 +137,9 @@ export class Maze {
 
     // создать ряд клеток с номером number
     getCellCode(number) {
-        const ratio = window.devicePixelRatio; // масштабирование монитора
+        const ratio = window.devicePixelRatio; // масштабирование монитора)
+
+        console.log(ratio);
 
         let cellSize;
         if (ratio == 1) { // для разного масштабирования разные размеры
@@ -147,7 +149,7 @@ export class Maze {
             cellSize = (400 - this.mazeSize * 1.6) / this.mazeSize;
         }
         else {
-
+            cellSize = (400 - this.mazeSize * (2 / ratio)) / this.mazeSize;
         }
 
         let code = `<div style='display: flex;'>`; // элементы в одной строчке

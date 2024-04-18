@@ -1,0 +1,34 @@
+
+.buttonContainer{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    width: 33vw;
+    align-items: center;
+}
+
+.buttonContainer > button{
+    margin: 10px;
+    background-color: #2ba369;
+    border-radius: 10px;
+    color: white;
+    width: calc(60px + (400 - 60) * ((100vw - 500px) / (2560 - 500)));
+    height: calc(30px + (130 - 30) * ((100vh - 500px) / (1440 - 500)));
+    border: 2px solid black;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Intro';
+    font-size: calc(9px + (27 - 9) * ((100vw - 500px) / (2560 - 500)));
+}
+
+.buttonContainer > button:hover {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px greenyellow;
+}
+
+.buttonContainer > button:active {
+    background-color: rgb(6, 99, 6);
+}
+
+.buttonContainer > button:disabled {
+    background-color: rgb(224, 90, 28);
+}

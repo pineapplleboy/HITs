@@ -8,6 +8,8 @@ export function resizeMaze() {
     maze.mazeSize = size;
     maze.buildClearMaze();
     maze.drawMaze();
+
+    document.getElementById("sliderResId").innerHTML = size;
 }
 
 export function selectBuildMode() {

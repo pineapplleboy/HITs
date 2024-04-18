@@ -2,6 +2,7 @@ import { maze } from "./mazeClass.js";
 import { resizeMaze, selectBuildMode, setAnimationSpeed, setPause } from "./functions.js";
 
 export let isMouseDown = false;
+
 resizeMaze();
 
 // если нажато колёсико мыши, запоминаем
@@ -57,4 +58,46 @@ document.querySelector('#selectBuildingMode').oninput = function() { // выбо
 
 document.querySelector('#sliderAnimation').oninput = function() { // выбор скорости анимации
     setAnimationSpeed();
+}
+
+// let listBlock = document.querySelector("#listId");
+
+// let textListBlock = document.getElementById("selectId");
+
+// document.querySelector("#selectId").onclick = function() {
+
+//     if (listBlock.hidden) {
+//         listBlock.hidden = false;
+//     }
+//     else {
+//         listBlock.hidden = true;
+//     }
+// }
+
+// document.querySelector("#firstVariant").onclick = function() {
+//     listBlock.hidden = true;
+//     maze.buildingMode = 0;
+//     textListBlock.textContent = "Режим строительства: стены";
+// }
+
+// document.querySelector("#secondVariant").onclick = function() {
+//     listBlock.hidden = true;
+//     maze.buildingMode = 1;
+//     textListBlock.textContent = "Режим строительства: старт";
+// }
+
+// document.querySelector("#thirdVariant").onclick = function() {
+//     listBlock.hidden = true;
+//     maze.buildingMode = 2;
+//     textListBlock.textContent = "Режим строительства: финиш";
+// }
+
+const dialog = document.querySelector("dialog"); 
+
+document.querySelector("#infoButton").onclick = function() {
+    dialog.showModal();
+}
+
+document.querySelector("#closeDialog").onclick = function() {
+    dialog.close();
 }

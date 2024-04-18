@@ -2,29 +2,60 @@
 <head>
     <meta charset="UTF-8">
     <title>Йооу</title>
-    <link rel="stylesheet" href="css/style.css">
+
     <script type="module" src="js/main.js" defer></script>
     <script src="../antAlgorithm/js/grain.js" defer></script>
     <script src="../antAlgorithm/js/backgroundBlobs.js" defer></script>
+
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/infoButton.css">
+    <link rel="stylesheet" href="../css/inputStyles.css">
+    <link rel="stylesheet" href="../css/button.css">
+    <link rel="stylesheet" href="../css/range.css">
 </head>
 <body>
 
     <section class="background"></section>
     <canvas class="grain"></canvas>
 
+    <button class="info-button" id="infoButton">?</button> 
+
+    <dialog>
+        <div class="dialog-wrapper">
+            <h3>Информация</h3>
+            <button class="closeButton" id="closeDialog">X</button>
+        </div>
+    </dialog>
+
     <h1>Алгоритмы</h1>
-    <h2>Салют! Это алгоритм A*</h2>
     <div class="mainAlgorithmUI">
 
         <section class="sliderContainer">
-            <form oninput="sliderResult.value=slider.value">
-                Размер карты:
-                <input id="slider" type="range" min="4" max="31" step="1" value="17">
-                <output name="sliderResult">17</output>
-            </form>
-            Скорость анимации:
+
+            <span>Размер карты:</span>
+            <input id="slider" type="range" min="4" max="31" step="1" value="17">
+            <span name="sliderResult" id="sliderResId">17</span>
+
+            <span>Скорость анимации:</span>
             <input id="sliderAnimation" type="range" min="0" max="100" step="1" value="50">
+
+            <!-- <div class="selectMode" id="selectModeId">
+                <a class="select" id="selectId">Режим строительства: стены</a>
+                <ul class="list" id="listId" hidden>
+                    <li id="firstVariant"><a>Стены</a></li>
+                    <li id="secondVariant"><a>Старт</a></li>
+                    <li id="thirdVariant"><a>Финиш</a></li>
+                </ul>
+                <input id="select" hidden>
+            </div> -->
+
+            Выберите режим строительства:
+            <select id="selectBuildingMode">
+                <option value="option1">Стены</option>
+                <option value="option2">Старт</option>
+                <option value="option3">Финиш</option>
+            </select>
+
         </section>
 
         <div class="mainPicture">
@@ -40,13 +71,6 @@
         
             <button id="goAlgButton">Запустить алгоритм</button>
             <button id="pauseButton" disabled="true">Пауза</button>
-
-            Выберите режим строительства:
-            <select id="selectBuildingMode">
-                <option value="option1">Стены</option>
-                <option value="option2">Старт</option>
-                <option value="option3">Финиш</option>
-            </select>
 
         </section>
     </div>
