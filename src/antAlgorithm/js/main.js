@@ -235,3 +235,19 @@ function makeSimulationStep() {
 }
 
 createNewField();
+
+const dialog = document.querySelector("dialog");  // информация
+
+document.querySelector("#infoButton").onclick = function() {
+    dialog.showModal();
+}
+
+document.querySelector("#closeDialog").onclick = function() {
+    dialog.close();
+}
+
+window.sessionStorage.setItem("slide", 3); // на какой слайд возвращаемся
+
+document.querySelector("#backButton").onclick = function() {
+    window.location.href = "../sliderMenu";
+}

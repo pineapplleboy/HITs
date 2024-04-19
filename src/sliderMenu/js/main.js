@@ -59,3 +59,7 @@ document.getElementById("treeButton").onclick = function() {
 document.getElementById("neuronButton").onclick = function() {
     window.location.href = "../neuron/try.html";
 }
+
+document.getElementById("backButton").onclick = function() {
+    window.location.href = "../mainPage";
+}

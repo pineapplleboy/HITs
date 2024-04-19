@@ -6,10 +6,7 @@
     <title>Точки для кластеризации</title>
     <style>
         #kCanvas {
-            /* width: 500px;
-            height: 500px; */
-            border: 1px solid black;
-            /* position: relative; */
+            border: 10px solid black;
         }
         #clearButton {
             margin-top: 10px;
@@ -27,6 +24,7 @@
     <canvas class="grain"></canvas>
 
     <button class="info-button" id="infoButton">?</button> 
+    <button class="back-button" id="backButton">←</button> 
 
     <dialog>
         <div class="dialog-wrapper">
@@ -40,7 +38,7 @@
     <div class="mainAlgorithmUI">
         
         <section class="sliderContainer">
-            <input type="range" id="centroidCount" min="2" max="10" value="2">
+            <input type="range" id="centroidCount" min="2" max="20" value="2">
         </section>
         
         <div class="mainPicture">
@@ -56,7 +54,7 @@
         </section>
     </div>
     
-    <script type = "module" src = 'main.js'></script>
+    <script type = "module" src = 'js/main.js'></script>
     <script src="../antAlgorithm/js/grain.js"></script>
     <script src="../antAlgorithm/js/backgroundBlobs.js"></script>
 </body>
