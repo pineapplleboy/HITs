@@ -178,7 +178,25 @@ export class Maze {
 
             for (let j = 0; j < this.mazeSize; j++) {
                 let elem = document.getElementById(`mazeCell${i * this.mazeSize + j}`);
-                elem.style.background = 'white';
+
+                if (this.mazeMap[i][j] === -1) { // чекаем, какая клетка была до этого (это для перестроения между экранами)
+                    console.log('aa');
+                    elem.style.background = 'black';
+                }
+                else if (this.mazeMap[i][j] === 0) {
+                    elem.style.background = 'white';
+                }
+                else if (this.mazeMap[i][j] === 1) {
+                    elem.style.background = 'gray';
+                }
+                else if (this.mazeMap[i][j] === 2) {
+                    elem.style.background = 'yellow';
+                }
+                else if (this.mazeMap[i][j] === 3) {
+                    elem.style.background = 'gold';
+                }
+
+                //elem.style.background = 'white';
                 elem.style.padding = 0;
                 elem.style.borderWidth = 1;
                 elem.style.borderColor = 'gray';

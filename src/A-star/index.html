@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../css/inputStyles.css">
     <link rel="stylesheet" href="../css/button.css">
     <link rel="stylesheet" href="../css/range.css">
-    <link rel="stylesheet" href="../css/inputSelect.css">
 </head>
 <body>
 
@@ -20,7 +19,7 @@
     <canvas class="grain"></canvas>
 
     <button class="info-button" id="infoButton">?</button> 
-    <button class="back-button" id="backButton">←</button>
+    <button class="back-button" id="backButton">←</button> 
 
     <dialog>
         <div class="dialog-wrapper">
@@ -45,14 +44,11 @@
             </div>
             
             Выберите режим строительства:
-            <div class="select-container">
-                <select class="select-box" id="selectBuildingMode">
-                    <option value="option1">Стены</option>
-                    <option value="option2">Старт</option>
-                    <option value="option3">Финиш</option>
-                </select>
-            </div>
-
+            <select id="selectBuildingMode">
+                <option value="option1">Стены</option>
+                <option value="option2">Старт</option>
+                <option value="option3">Финиш</option>
+            </select>
 
         </section>
 
