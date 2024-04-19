@@ -81,11 +81,11 @@ export function editAbsoluteMistakeText() {
 
     if (absoluteMistakeMax > 1) {
         absoluteMistakeMax = 1;
-        document.getElementById("absoluteRange").value = 1;
+        document.getElementById("absoluteRangeText").value = 1;
     }
     else if (absoluteMistakeMax < 0) {
         absoluteMistakeMax = 0;
-        document.getElementById("absoluteRange").value = 0;
+        document.getElementById("absoluteRangeText").value = 0;
     }
 
     document.getElementById("absoluteRange").value = absoluteMistakeMax;
@@ -95,12 +95,12 @@ export function editAbsoluteMistakeGlobalText() {
     absoluteMistakeGlobalMax = document.getElementById("absoluteGlobalRangeText").value;
 
     if (absoluteMistakeGlobalMax > 5) {
-        absoluteMistakeGlobalMax = 1;
-        document.getElementById("absoluteGlobalRange").value = 5;
+        absoluteMistakeGlobalMax = 5;
+        document.getElementById("absoluteGlobalRangeText").value = 5;
     }
     else if (absoluteMistakeGlobalMax < 0) {
         absoluteMistakeGlobalMax = 0;
-        document.getElementById("absoluteGlobalRange").value = 0;
+        document.getElementById("absoluteGlobalRangeText").value = 0;
     }
 
     document.getElementById("absoluteGlobalRange").value = absoluteMistakeGlobalMax;
