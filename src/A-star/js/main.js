@@ -83,7 +83,6 @@ window.addEventListener('resize', (e) => { // перенос на другой �
 document.querySelector("#sliderResult").oninput = function() {
     
     if (document.getElementById("sliderResult").value != undefined) {
-        console.log(document.getElementById("sliderResult").value.length)
         if (document.getElementById("sliderResult").value.length > 1 && document.getElementById("sliderResult").value[0] == "0") {
             document.getElementById("sliderResult").value = Number(document.getElementById("sliderResult").value[1]);
         }

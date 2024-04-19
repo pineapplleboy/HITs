@@ -97,7 +97,7 @@ export class Maze {
             this.startCell = number;
             this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] = 0;
             const newStartCell = document.getElementById(`mazeCell${this.startCell}`);
-            newStartCell.style.background = "green";
+            newStartCell.style.background = "#0A5F38";
         }      
     }
 
@@ -110,7 +110,7 @@ export class Maze {
             this.finishCell = number;
             this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] = 0;
             const newStartCell = document.getElementById(`mazeCell${this.finishCell}`);
-            newStartCell.style.background = "red";
+            newStartCell.style.background = "#FF5A33";
         }
     }
 
@@ -121,7 +121,7 @@ export class Maze {
         if (number !== this.startCell && number !== this.finishCell && this.mazeMap[y][x] >= 0) { // если клетка пустая, ставит стену
             this.mazeMap[y][x] = -1;
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
-            currentMazeCell.style.background = "black";
+            currentMazeCell.style.background = "#146152";
             currentMazeCell.style.borderColor = "gray";  
         }
         else if (this.mazeMap[y][x] === -1) { // если занята, убирает стену
@@ -180,20 +180,19 @@ export class Maze {
                 let elem = document.getElementById(`mazeCell${i * this.mazeSize + j}`);
 
                 if (this.mazeMap[i][j] === -1) { // чекаем, какая клетка была до этого (это для перестроения между экранами)
-                    console.log('aa');
-                    elem.style.background = 'black';
+                    elem.style.background = '#146152';
                 }
                 else if (this.mazeMap[i][j] === 0) {
                     elem.style.background = 'white';
                 }
                 else if (this.mazeMap[i][j] === 1) {
-                    elem.style.background = 'gray';
+                    elem.style.background = '#B4CF66';
                 }
                 else if (this.mazeMap[i][j] === 2) {
-                    elem.style.background = 'yellow';
+                    elem.style.background = '#FFEC5C';
                 }
                 else if (this.mazeMap[i][j] === 3) {
-                    elem.style.background = 'gold';
+                    elem.style.background = '#EE204D';
                 }
 
                 //elem.style.background = 'white';
@@ -220,16 +219,16 @@ export class Maze {
         this.startCell = 0;
         this.finishCell = this.mazeSize * this.mazeSize - 1;
 
-        document.getElementById(`mazeCell${this.startCell}`).style.background = "green";
+        document.getElementById(`mazeCell${this.startCell}`).style.background = "#0A5F38";
 
-        document.getElementById(`mazeCell${this.finishCell}`).style.background = "red";
+        document.getElementById(`mazeCell${this.finishCell}`).style.background = "#FF5A33";
     }
 
     // окрашивает клетку в розовый
     paintPinkCell(number) {
         if (number !== this.startCell && number !== this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
-            currentMazeCell.style.background = "pink";
+            currentMazeCell.style.background = "#FFCA86";
             currentMazeCell.style.borderColor = "gray";
         }
     }
@@ -239,7 +238,7 @@ export class Maze {
         if (number !== this.startCell && number !== this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
             if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] === -1) {
-                currentMazeCell.style.background = "black";
+                currentMazeCell.style.background = "#146152";
                 currentMazeCell.style.borderColor = "gray";
             }
             else if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] === 0) {
@@ -250,10 +249,10 @@ export class Maze {
                 currentMazeCell.style.background = "gray";
             }
             else if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] === 2) {
-                currentMazeCell.style.background = "yellow";
+                currentMazeCell.style.background = "#FFEC5C";
             }
             else if (this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] === 3) {
-                currentMazeCell.style.background = "gold";
+                currentMazeCell.style.background = "#EE204D";
             }
         }
     }
@@ -487,7 +486,7 @@ export class Maze {
         if (number !== this.startCell && number !== this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
             this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] = 1;
-            currentMazeCell.style.background = "gray";
+            currentMazeCell.style.background = "#B4CF66";
         }
     }
 
@@ -496,7 +495,7 @@ export class Maze {
         if (number !== this.startCell && number !== this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
             this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] = 2;
-            currentMazeCell.style.background = "yellow";
+            currentMazeCell.style.background = "#FFEC5C";
         }
     }
 
@@ -505,7 +504,7 @@ export class Maze {
         if (number !== this.startCell && number !== this.finishCell) {
             const currentMazeCell = document.getElementById(`mazeCell${number}`);
             this.mazeMap[Math.floor(number / this.mazeSize)][number % this.mazeSize] = 3;
-            currentMazeCell.style.background = "gold";
+            currentMazeCell.style.background = "#EE204D";
         }
     }
 
