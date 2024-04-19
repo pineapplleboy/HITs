@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drawing app</title>
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/infoButton.css">
+    <link rel="stylesheet" href="../css/inputStyles.css">
+    <link rel="stylesheet" href="../css/button.css">
+    <link rel="stylesheet" href="../css/range.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <section class="background"></section>
+    <canvas class="grain"></canvas>
+
+    <button class="info-button" id="infoButton">?</button> 
+    <button class="back-button" id="backButton">←</button> 
+
+    <dialog>
+        <div class="dialog-wrapper">
+            <h3>Информация</h3>
+            <button class="closeButton" id="closeDialog">X</button>
+        </div>
+    </dialog>
+
+    <h1>Нейронная сеть</h1>
+    <div class="mainAlgorithmUI">
+
+        <section class="sliderContainer">
+            <div id="digit-column">
+                <span class="digit">0</span>
+                <span class="digit">1</span>
+                <span class="digit">2</span>
+                <span class="digit">3</span>
+                <span class="digit">4</span>
+                <br>
+                <span class="digit">5</span>
+                <span class="digit">6</span>
+                <span class="digit">7</span>
+                <span class="digit">8</span>
+                <span class="digit">9</span>
+            </div>
+        </section>
+
+        <div class="mainPicture">
+            <canvas id="drawing-board"></canvas>
+        </div>
+
+        <section class="buttonContainer">
+
+            <button id="clear">Очистить</button>
+            <button id="recognize">Определить цифру</button>
+                
+            <input type="file" id="fileInput">
+        </section>
+    </div>
+    <div id="result"></div>
+
+    <script src="Network.js"></script>
+    <script src="main.js"></script>
+    <script src="../antAlgorithm/js/grain.js"></script>
+    <script src="../antAlgorithm/js/backgroundBlobs.js"></script>
+</body>
+</html>

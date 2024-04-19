@@ -69,34 +69,40 @@ function editMutText() {
 
 function editGenText() {
 
-    generationsAmount = document.getElementById("genText").value;
+    if (document.getElementById("genText").value != undefined) {
+    
+        if (document.getElementById("genText").value.length > 1 && document.getElementById("genText").value[0] == "0") {
+            document.getElementById("genText").value = Number(document.getElementById("genText").value[1]);
+        }
 
-    if (generationsAmount > 20000) {
-        generationsAmount = 20000;
-        document.getElementById("genText").value = 20000;
-    }
-    else if (generationsAmount < 200) {
-        generationsAmount = 200;
-        document.getElementById("genText").value = 200;
+        document.getElementById("genText").value = Math.min(document.getElementById("genText").value, 20000);
+        document.getElementById("generationsAmount").value = document.getElementById("genText").value;
     }
 
-    document.getElementById("generationsAmount").value = generationsAmount;
+    generationsAmount = document.getElementById("generationsAmount").value;
+
+    setTimeout(function() {
+        document.getElementById("genText").value = Math.max(200, document.getElementById("genText").value);
+    }, 5000)
 }
 
 function editIndText() {
 
-    individualsAmount = document.getElementById("indText").value;
+    if (document.getElementById("indText").value != undefined) {
+    
+        if (document.getElementById("indText").value.length > 1 && document.getElementById("indText").value[0] == "0") {
+            document.getElementById("indText").value = Number(document.getElementById("indText").value[1]);
+        }
 
-    if (individualsAmount > 1000) {
-        individualsAmount = 1000;
-        document.getElementById("indText").value = 1000;
-    }
-    else if (mutationChance < 200) {
-        individualsAmount = 200;
-        document.getElementById("indText").value = 200;
+        document.getElementById("indText").value = Math.min(document.getElementById("indText").value, 1000);
+        document.getElementById("individualsAmount").value = document.getElementById("indText").value;
     }
 
-    document.getElementById("individualsAmount").value = individualsAmount;
+    individualsAmount = document.getElementById("individualsAmount").value;
+
+    setTimeout(function() {
+        document.getElementById("genText").value = Math.max(200, document.getElementById("genText").value);
+    }, 5000)
 }
 
 function updateParameters() {

@@ -1,79 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drawing app</title>
-    <style>
-        .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #toolbar {
-            width: 100px;
-        }
-
-        #drawing-board {
-            width: 500px;
-            height: 500px;
-            border: 1px solid black;
-            cursor: crosshair;
-            margin-right: 20px;
-        }
-
-        #digit-column {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 50px;
-        }
-
-        .digit {
-            font-size: 20px;
-            margin-bottom: 10px;
-        }
-    </style>
-</head>
-<body>
-<section class="container">
-    <div id="toolbar">
-        <h1>Draw.</h1>
-        <button id="clear">Clear</button>
-        <div class="dropdown">
-            <button class="dropbtn">Recognize</button>
-            <div class="dropdown-content">
-                <a href="#" id="recognize">Recognize drawing</a>
-            </div>
-        </div>
-    </div>
-    <div class="drawing-board">
-        <canvas id="drawing-board"></canvas>
-    </div>
-    <div id="digit-column">
-        <div class="digit">0</div>
-        <div class="digit">1</div>
-        <div class="digit">2</div>
-        <div class="digit">3</div>
-        <div class="digit">4</div>
-        <div class="digit">5</div>
-        <div class="digit">6</div>
-        <div class="digit">7</div>
-        <div class="digit">8</div>
-        <div class="digit">9</div>
-    </div>
-</section>
-<div>
-    <label for="drawn-digit-input">Enter the drawn digit:</label>
-    <input type="number" id="drawn-digit-input" min="0" max="9">
-</div>
-<input type="file" id="fileInput">
-<div id="result"></div>
-<script src="Network.js"></script>
-<script>
-    const nn = new NeuralNetwork();
+const nn = new NeuralNetwork();
     document.addEventListener("DOMContentLoaded", function() {
         const fileInput = document.getElementById('fileInput');
         fileInput.addEventListener('change', (event) => {
@@ -139,8 +64,8 @@
         const brushSize = 20;
         const rect = canvas.getBoundingClientRect();
 
-        const mouseX = Math.floor((e.clientX - rect.left) / scale);
-        const mouseY = Math.floor((e.clientY - rect.top) / scale);
+        const mouseX = Math.floor((e.clientX - rect.left) / scale) * 500 / rect.width;
+        const mouseY = Math.floor((e.clientY - rect.top) / scale) * 500 / rect.height;
 
         if (mousePressed !== 0) {
             for (let i = -brushSize; i <= brushSize; i++) {
@@ -293,6 +218,19 @@
         }
         return pixels;
     }
-</script>
-</body>
-</html>
+    
+const dialog = document.querySelector("dialog");
+
+document.querySelector("#infoButton").onclick = function() {
+    dialog.showModal();
+}
+
+document.querySelector("#closeDialog").onclick = function() {
+    dialog.close();
+}
+
+window.sessionStorage.setItem("slide", 5); // на какой слайд возвращаемся
+
+document.querySelector("#backButton").onclick = function() {
+    window.location.href = "../sliderMenu";
+}

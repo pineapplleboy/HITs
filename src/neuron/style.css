@@ -1,0 +1,5 @@
+.digit{
+    font-family: 'Intro';
+    font-size: calc(14px + (70 - 14) * ((100vw - 500px) / (2560 - 500)));
+    margin: 9px;
+}

@@ -78,34 +78,40 @@ document.querySelector("#stepText").oninput = function() {
 
 function editAntsText() {
 
-    antsAmount = document.getElementById("antsText").value;
+    if (document.getElementById("antsText").value != undefined) {
 
-    if (antsAmount > 2000) {
-        antsAmount = 2000;
-        document.getElementById("antsText").value = 2000;
-    }
-    else if (antsAmount < 10) {
-        antsAmount = 10;
-        document.getElementById("antsText").value = 10;
+        if (document.getElementById("antsText").value.length > 1 && document.getElementById("antsText").value[0] == "0") {
+            document.getElementById("antsText").value = Number(document.getElementById("antsText").value[1]);
+        }
+
+        document.getElementById("antsText").value = Math.min(document.getElementById("antsText").value, 2000);
+        document.getElementById("antsAmount").value = document.getElementById("antsText").value;
     }
 
-    document.getElementById("antsAmount").value = antsAmount;
+    antsAmount = document.getElementById("antsAmount").value;
+
+    setTimeout(function() {
+        document.getElementById("antsText").value = Math.max(10, document.getElementById("antsText").value);
+    }, 5000)
 }
 
 function editStepText() {
 
-    antStepDist = document.getElementById("stepText").value;
+    if (document.getElementById("stepText").value != undefined) {
 
-    if (antStepDist > 20) {
-        antStepDist = 20;
-        document.getElementById("stepText").value = 20;
-    }
-    else if (antStepDist < 4) {
-        antStepDist = 4;
-        document.getElementById("stepText").value = 4;
+        if (document.getElementById("stepText").value.length > 1 && document.getElementById("stepText").value[0] == "0") {
+            document.getElementById("stepText").value = Number(document.getElementById("stepText").value[1]);
+        }
+
+        document.getElementById("stepText").value = Math.min(document.getElementById("stepText").value, 20);
+        document.getElementById("antStepDist").value = document.getElementById("stepText").value;
     }
 
-    document.getElementById("antStepDist").value = antStepDist;
+    antStepDist = document.getElementById("antStepDist").value;
+
+    setTimeout(function() {
+        document.getElementById("stepText").value = Math.max(4, document.getElementById("stepText").value);
+    }, 5000)
 }
 
 const mouse = {
