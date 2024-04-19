@@ -3,13 +3,16 @@ import { maze } from "./mazeClass.js";
 let size = 17;    
 export let option = 0;
 
-export function resizeMaze() {
+export function resizeMaze(isText = false) {
     size = document.getElementById("slider").value;
     maze.mazeSize = size;
     maze.buildClearMaze();
     maze.drawMaze();
 
-    document.getElementById("sliderResId").innerHTML = size;
+    // document.getElementById("sliderResId").innerHTML = size;
+    if (!isText) {
+        document.getElementById("sliderResult").value = size;
+    }
 }
 
 export function selectBuildMode() {

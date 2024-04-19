@@ -3,9 +3,9 @@
     <meta charset="UTF-8">
     <title>Йооу</title>
 
-    <script type="module" src="js/main.js" defer></script>
     <script src="../antAlgorithm/js/grain.js" defer></script>
     <script src="../antAlgorithm/js/backgroundBlobs.js" defer></script>
+    <script type="module" src="js/main.js" defer></script>
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/infoButton.css">
@@ -36,7 +36,8 @@
             <div class="fullSlider">
                 <label for="slider">Размер карты:</label>
                 <input id="slider" type="range" min="4" max="31" step="1" value="17">
-                <span name="sliderResult" id="sliderResId">17</span>
+                <input id="sliderResult" type="number" autocomplete="off" min="0" max="31" value="17">
+                <!-- <span name="sliderResult" id="sliderResId">17</span> -->
             </div>
             <div class="fullSlider">
                 <label for="slider">Скорость анимации:</label>

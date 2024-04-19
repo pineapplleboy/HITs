@@ -22,6 +22,10 @@ input[type=number] {
     position: absolute;
 }
 
+input[type=number]:disabled {
+    background-color: white;
+}
+
 input[type="number"]::-webkit-inner-spin-button {
 	display: none;
 }
