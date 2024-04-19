@@ -1,24 +1,15 @@
 const nn = new NeuralNetwork();
-    document.addEventListener("DOMContentLoaded", function() {
-        const fileInput = document.getElementById('fileInput');
-        fileInput.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.readAsText(file);
-                reader.onload = function () {
-                    const fileContent = reader.result;
-                    console.log('File content:', fileContent);
-                    nn.loadWeightsAndBiasesFromFile(fileContent);
-                };
-
-                reader.onerror = function () {
-                    console.error('Error reading file');
-                };
-            }
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('/src/neuron/weights.json')
+        .then(response => response.json())
+        .then(data => {
+            console.log('File loaded successfully');
+            nn.loadWeightsAndBiasesFromFile(data);
+        })
+        .catch(error => {
+            console.error('Failed to load file:', error);
         });
-
-    });
+});
 
     const canvas = document.getElementById('drawing-board');
     const ctx = canvas.getContext('2d');
@@ -91,9 +82,6 @@ const nn = new NeuralNetwork();
         }
     }
 
-
-
-
     function drawCanvas() {
         const ctx = canvas.getContext('2d');
 
@@ -105,7 +93,6 @@ const nn = new NeuralNetwork();
             }
         }
     }
-
 
     function clearCanvas() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -158,12 +145,9 @@ const nn = new NeuralNetwork();
     }
 
     function recognizeDrawing() {
-    function sigmoid(x) {
-        return 1 / (1 + Math.exp(-x));
-    }
     const allDigits = document.querySelectorAll('.digit');
     allDigits.forEach(digit => {
-        digit.style.color = ''; // Сбрасываем цвет текста
+        digit.style.color = '';
     });
 
     const brightnessValues = colors.map(row => row.map(val => Math.round(val * 255)));
@@ -177,37 +161,13 @@ const nn = new NeuralNetwork();
         maxIndices.push(index);
         output[index] = -Infinity;
     }
-
-    let resultString = "Recognized digits: ";
     const highlightColors = ['green', 'yellow', 'red'];
     const digitBlocks = document.querySelectorAll('.digit');
     maxIndices.forEach((index, i) => {
             digitBlocks[index].style.color = highlightColors[i];
         });
-    saveDrawnDigitsDataToCSV();
-    document.getElementById('result').innerText = resultString;
-    console.log('Max value indices:', maxIndices);
-    console.log(output);
+    //saveDrawnDigitsDataToCSV();
 }
-    function saveDrawnDigitsDataToCSV() {
-        const drawnDigit = parseInt(document.getElementById('drawn-digit-input').value);
-
-        const newRow = `${drawnDigit},${colors.map(row => row.map(val => Math.round(val * 255)).join(',')).join(',')}\n`;
-
-        const blob = new Blob([newRow], { type: 'text/csv;charset=utf-8;' });
-
-        const link = document.createElement("a");
-        if (link.download !== undefined) {
-            const url = URL.createObjectURL(blob);
-            link.setAttribute("href", url);
-            link.setAttribute("download", "mnist_train.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        } else {
-            console.error("Your browser does not support downloading files.");
-        }
-    }
 
     function flattenColorsArray(colors) {
         let pixels = [];
