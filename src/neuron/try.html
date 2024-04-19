@@ -233,32 +233,39 @@
     }
 
     function recognizeDrawing() {
-        function sigmoid(x) {
-            return 1 / (1 + Math.exp(-x));
-        }
-
-        let output = nn.feedForward(flattenColorsArray(colors));
-        let sortedOutput = output.slice().sort((a, b) => b - a);
-        let maxIndices = [];
-        for (let i = 0; i < 3; i++) {
-            let maxVal = sortedOutput[i];
-            let index = output.indexOf(maxVal);
-            maxIndices.push(index);
-            output[index] = -Infinity;
-        }
-
-        let resultString = "Recognized digits: ";
-        for (let i = 0; i < maxIndices.length; i++) {
-            resultString += `${maxIndices[i]}`;
-            if (i < maxIndices.length - 1) {
-                resultString += ", ";
-            }
-        }
-        saveDrawnDigitsDataToCSV();
-        document.getElementById('result').innerText = resultString;
-        console.log('Max value indices:', maxIndices);
-        console.log(output);
+    function sigmoid(x) {
+        return 1 / (1 + Math.exp(-x));
     }
+    const allDigits = document.querySelectorAll('.digit');
+    allDigits.forEach(digit => {
+        digit.style.color = ''; // Сбрасываем цвет текста
+    });
+
+    const brightnessValues = colors.map(row => row.map(val => Math.round(val * 255)));
+
+    let output = nn.feedForward(flattenColorsArray(brightnessValues));
+    let sortedOutput = output.slice().sort((a, b) => b - a);
+    let maxIndices = [];
+    for (let i = 0; i < 3; i++) {
+        let maxVal = sortedOutput[i];
+        let index = output.indexOf(maxVal);
+        maxIndices.push(index);
+        output[index] = -Infinity;
+    }
+
+    let resultString = "Recognized digits: ";
+    const highlightColors = ['green', 'yellow', 'red'];
+    maxIndices.forEach((index, i) => {
+        if (i < highlightColors.length) {
+            const digitElement = document.querySelector(`.digit:nth-child(${index + 1})`);
+            digitElement.style.color = highlightColors[i];
+        }
+    });
+    saveDrawnDigitsDataToCSV();
+    document.getElementById('result').innerText = resultString;
+    console.log('Max value indices:', maxIndices);
+    console.log(output);
+}
     function saveDrawnDigitsDataToCSV() {
         const drawnDigit = parseInt(document.getElementById('drawn-digit-input').value);
 
