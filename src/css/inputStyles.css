@@ -19,7 +19,7 @@ input[type=number] {
     width: calc(30px + (70 - 30) * ((100vw - 500px) / (2560 - 500)));
     color:black;
     text-align: center;
-    position: relative;
+    position: absolute;
 }
 
 input[type="number"]::-webkit-inner-spin-button {

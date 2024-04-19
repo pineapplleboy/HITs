@@ -104,3 +104,23 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 });
+
+const dialog = document.querySelector("dialog");  // информация
+
+document.querySelector("#infoButton").onclick = function() {
+    dialog.showModal();
+}
+
+document.querySelector("#closeDialog").onclick = function() {
+    dialog.close();
+}
+
+window.sessionStorage.setItem("slide", 1); // на какой слайд возвращаемся
+
+document.querySelector("#backButton").onclick = function() {
+    window.location.href = "../sliderMenu";
+}
+
+window.addEventListener('resize', (e) => { // перенос на другой монитор
+    maze.drawMaze();
+})

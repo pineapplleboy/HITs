@@ -133,3 +133,7 @@ document.querySelector("#closeDialog").onclick = function() {
 }
 
 window.sessionStorage.setItem("slide", 4); // на какой слайд возвращаемся
+
+document.querySelector("#backButton").onclick = function() {
+    window.location.href = "../sliderMenu";
+}

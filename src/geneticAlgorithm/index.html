@@ -7,12 +7,23 @@
         <link rel="stylesheet" href="../css/button.css">
         <link rel="stylesheet" href="../css/range.css">
         <link rel="stylesheet" href="../css/inputStyles.css">
+        <link rel="stylesheet" href="../css/infoButton.css">
     </head>
     <body>
         <section class="background"></section>
         <canvas class="grain"></canvas>
 
-        <h1>Генетический алгоритм</h1>
+        <button class="info-button" id="infoButton">?</button> 
+        <button class="back-button" id="backButton">←</button> 
+
+        <dialog>
+            <div class="dialog-wrapper">
+                <h3>Информация</h3>
+                <button class="closeButton" id="closeDialog">X</button>
+            </div>
+        </dialog>
+
+        <h1>Генетический</h1>
 
         <div class="mainAlgorithmUI">
 
@@ -44,8 +55,8 @@
                 <button id="startGeneticAlgorithm">Запустить алгоритм</button>
             </section>
         </div>
-        <script src="main.js"></script>
         <script src="../antAlgorithm/js/grain.js"></script>
         <script src ="../antAlgorithm/js/backgroundBlobs.js"></script>
+        <script src="main.js"></script>
     </body>
 </html>
