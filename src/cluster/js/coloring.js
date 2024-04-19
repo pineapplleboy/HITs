@@ -1,6 +1,6 @@
 export function getRandomColor(usedColors) {
     let color;
-    const maxAttempts = 20;
+    const maxAttempts = 100;
     let attempts = 0;
 
     do {
@@ -31,3 +31,5 @@ function calculateColorDistance(color1, color2) {
 function getRandomRGBValue() {
     return Math.floor(Math.random() * 254);
 }
+
+

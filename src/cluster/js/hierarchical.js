@@ -7,7 +7,6 @@ export function hierarchicalClustering(pointsOfIerarch, centroidCountInput) {
     while (currentClusters.length > centroidCountInput.value) {
         let minDistance = Infinity;
         let bestPair = {};
-
         for (let i = 0; i < currentClusters.length; i++) {
             for (let j = i + 1; j < currentClusters.length; j++) {
                 const distance = calculateClusterDistance(currentClusters[i], currentClusters[j]);
@@ -17,8 +16,6 @@ export function hierarchicalClustering(pointsOfIerarch, centroidCountInput) {
                 }
             }
         }
-
-        // Объединяем найденную пару кластеров
         const newCluster = new Set([...bestPair.cluster1, ...bestPair.cluster2]);
         currentClusters = currentClusters.filter(cluster => cluster !== bestPair.cluster1 && cluster !== bestPair.cluster2);
         currentClusters.push(newCluster);
