@@ -60,7 +60,7 @@ function updateCentroids(centroids, pointsOfK) {
 }
 
 function moveCentroids(centroids) {
-    // In the provided function, no operations were performed on the HTML elements, so let's assume it's for display
+    
 }
 
 function kMeansPlusPlus(count, pointsOfK) {

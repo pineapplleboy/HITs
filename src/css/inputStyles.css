@@ -89,3 +89,7 @@ select {
 option {
     background-color: #1b6441;
 }
+
+select:disabled {
+    background-color: rgb(224, 90, 28);
+}

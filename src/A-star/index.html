@@ -19,6 +19,7 @@
     <canvas class="grain"></canvas>
 
     <button class="info-button" id="infoButton">?</button> 
+    <button class="back-button" id="backButton">←</button> 
 
     <dialog>
         <div class="dialog-wrapper">
@@ -41,25 +42,13 @@
                 <label for="slider">Скорость анимации:</label>
                 <input id="sliderAnimation" type="range" min="0" max="100" step="1" value="50">
             </div>
-
-            <!-- <div class="selectMode" id="selectModeId">
-                <a class="select" id="selectId">Режим строительства: стены</a>
-                <ul class="list" id="listId" hidden>
-                    <li id="firstVariant"><a>Стены</a></li>
-                    <li id="secondVariant"><a>Старт</a></li>
-                    <li id="thirdVariant"><a>Финиш</a></li>
-                </ul>
-                <input id="select" hidden>
-            </div> -->
-
+            
             Выберите режим строительства:
-            <div class="select-container">
-                <select class="select-box" id="selectBuildingMode">
-                    <option value="option1">Стены</option>
-                    <option value="option2">Старт</option>
-                    <option value="option3">Финиш</option>
-                </select>
-            </div>
+            <select id="selectBuildingMode">
+                <option value="option1">Стены</option>
+                <option value="option2">Старт</option>
+                <option value="option3">Финиш</option>
+            </select>
 
         </section>
 

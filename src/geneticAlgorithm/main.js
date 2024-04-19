@@ -305,7 +305,7 @@ function setMutation(ind){
 
         let firstGen = getRandomInt(1, nodesCount);
             let secondGen = getRandomInt(1, nodesCount);
-            while(nodesCount != 1 && nodesCount != 2 && firstGen === secondGen){
+            while(nodesCount !== 1 && nodesCount !== 2 && firstGen === secondGen){
                 secondGen = getRandomInt(1, nodesCount);
             }
     

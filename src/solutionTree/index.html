@@ -3,10 +3,10 @@
     <meta charset="UTF-8">
     <title>Кусты решений</title>
     
-    <script type="module" src="js/main.js" defer></script>
     <script src="../antAlgorithm/js/grain.js" defer></script>
     <script src="../antAlgorithm/js/backgroundBlobs.js" defer></script>
-
+    <script type="module" src="js/main.js" defer></script>
+    
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/infoButton.css">
     <link rel="stylesheet" href="../css/inputStyles.css">
@@ -35,19 +35,19 @@
         <section class="sliderContainer">
 
             <div class="fullSlider">
-                <label for="relativeRange">Допустимая погрешность относительной точности:</label>
+                <label for="relativeRange">Погрешность относительной точности:</label>
                 <input id="relativeRange" type="range" min="0" max="1" step="0.01" value="0.4">
                 <input id="relativeRangeText" type="number" autocomplete="off" min="0" max="1" step="0.01" value="0.4">
             </div>
             
             <div class="fullSlider">
-                <label for="absoluteRange">Допустимая погрешность абсолютной ошибки узла:</label>
+                <label for="absoluteRange">Погрешность абсолютной ошибки узла:</label>
                 <input id="absoluteRange" type="range" min="0" max="1" step="0.01" value="0.19">
                 <input id="absoluteRangeText" type="number" autocomplete="off" min="0" max="1" step="0.01" value="0.19">
             </div>
 
             <div class="fullSlider">
-                <label for="absoluteGlobalRange">Допустимая погрешность глобальной абсолютной ошибки:</label>
+                <label for="absoluteGlobalRange">Погрешность глобальной абсолютной ошибки:</label>
                 <input id="absoluteGlobalRange" type="range" min="0" max="5" step="0.01" value="0.5">
                 <input id="absoluteGlobalRangeText" type="number" min="0" max="5" step="0.01" value="0.5" autocomplete="off">
             </div>
@@ -56,7 +56,7 @@
 
         <div class="mainPicture">
             <div style="overflow: scroll;" id="canvasId">
-                <canvas id="canvas" width="680" height="680" style="border:1px solid #ffffff;"></canvas>
+                <canvas id="canvas" width="430" height="430"></canvas>
             </div>
         </div>
 

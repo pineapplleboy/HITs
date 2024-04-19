@@ -18,7 +18,7 @@ class PriorityQueue { // https://studyjavascript.blogspot.com/2019/03/javascript
     }
 
     isEmpty() {
-        return this.storage.length == 0;
+        return this.storage.length === 0;
     }
 
     size() {

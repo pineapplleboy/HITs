@@ -60,50 +60,7 @@ document.querySelector('#sliderAnimation').oninput = function() { // выбор 
     setAnimationSpeed();
 }
 
-// document.addEventListener('resize', function(event) {
-
-//     console.log(13);
-//     cells = document.getElementsByClassName('singleCell');
-//     cellsArr = Array.from(cells);
-//     for(let i = 0; i < cellsArr.length; ++i){
-//         cells[i].style.height = cells[i].style.width;
-//         console.log(cells[i]);
-//     }
-// });
-
-// let listBlock = document.querySelector("#listId");
-
-// let textListBlock = document.getElementById("selectId");
-
-// document.querySelector("#selectId").onclick = function() {
-
-//     if (listBlock.hidden) {
-//         listBlock.hidden = false;
-//     }
-//     else {
-//         listBlock.hidden = true;
-//     }
-// }
-
-// document.querySelector("#firstVariant").onclick = function() {
-//     listBlock.hidden = true;
-//     maze.buildingMode = 0;
-//     textListBlock.textContent = "Режим строительства: стены";
-// }
-
-// document.querySelector("#secondVariant").onclick = function() {
-//     listBlock.hidden = true;
-//     maze.buildingMode = 1;
-//     textListBlock.textContent = "Режим строительства: старт";
-// }
-
-// document.querySelector("#thirdVariant").onclick = function() {
-//     listBlock.hidden = true;
-//     maze.buildingMode = 2;
-//     textListBlock.textContent = "Режим строительства: финиш";
-// }
-
-const dialog = document.querySelector("dialog"); 
+const dialog = document.querySelector("dialog");  // информация
 
 document.querySelector("#infoButton").onclick = function() {
     dialog.showModal();
@@ -112,3 +69,13 @@ document.querySelector("#infoButton").onclick = function() {
 document.querySelector("#closeDialog").onclick = function() {
     dialog.close();
 }
+
+window.sessionStorage.setItem("slide", 0); // на какой слайд возвращаемся
+
+document.querySelector("#backButton").onclick = function() {
+    window.location.href = "../sliderMenu";
+}
+
+window.addEventListener('resize', (e) => { // перенос на другой монитор
+    maze.drawMaze();
+})

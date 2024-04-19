@@ -88,6 +88,9 @@ div#canvasId {
     max-width: calc(200px + (700 - 200) * ((100vw - 500px) / (2560 - 500)));
     max-height: calc(200px + (700 - 200) * ((100vw - 500px) / (2560 - 500)));
 
+    width: 450px;
+    height: 450px;
+
     position: absolute;
     overflow: hidden;
     position: relative;
