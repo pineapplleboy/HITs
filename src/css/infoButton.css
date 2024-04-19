@@ -22,10 +22,16 @@
     background-color: #81b3b3;
 }
 
-dialog{
+dialog {
+    max-width: 40vw;
+    max-height: 40vh;
     text-align: center;
     border-radius: 10px;
     position: fixed;
+    background-color: transparent;
+    border-color: transparent;
+
+    font-size: calc(9px + (27 - 9) * ((100vw - 500px) / (2560 - 500)));
     /* top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); */
