@@ -1,3 +1,4 @@
+import { getRandomColor } from "./coloring.js";
 export function startKMeans(flag, kMeansIndexes, centroidCountInput, pointsOfK, kCanvas, usedColors) {
     let centroids = kMeansPlusPlus(centroidCountInput.value, pointsOfK);
     let threshold = 0.1;
@@ -12,7 +13,6 @@ export function startKMeans(flag, kMeansIndexes, centroidCountInput, pointsOfK, 
         });
 
         updateCentroids(centroids, pointsOfK);
-        moveCentroids(centroids);
 
         centroids.forEach(function(centroid, centroidIndex) {
             const oldCentroid = oldCentroids[centroidIndex];
@@ -57,10 +57,6 @@ function updateCentroids(centroids, pointsOfK) {
             centroid.y = sumY / count;
         }
     });
-}
-
-function moveCentroids(centroids) {
-    
 }
 
 function kMeansPlusPlus(count, pointsOfK) {
@@ -134,39 +130,6 @@ function colorPoints(centroids, pointsOfK, kCanvas, flag, usedColors) {
             }
         }
     });
-}
-function getRandomColor(usedColors) {
-    let color;
-    const maxAttempts = 20;
-    let attempts = 0;
-
-    do {
-        color = `rgb(${getRandomRGBValue()}, ${getRandomRGBValue()}, ${getRandomRGBValue()})`;
-        attempts++;
-    } while (usedColors.has(color) || isColorTooClose(color, usedColors) || attempts < maxAttempts);
-
-    usedColors.add(color);
-    return color;
-}
-
-function isColorTooClose(newColor, usedColors) {
-    const threshold = 50;
-    for (const usedColor of usedColors) {
-        if (calculateColorDistance(newColor, usedColor) < threshold) {
-            return true;
-        }
-    }
-    return false;
-}
-
-function calculateColorDistance(color1, color2) {
-    const [r1, g1, b1] = color1.match(/\d+/g).map(Number);
-    const [r2, g2, b2] = color2.match(/\d+/g).map(Number);
-    return Math.sqrt((r1 - r2) ** 2 + (g1 - g2) ** 2 + (b1 - b2) ** 2);
-}
-
-function getRandomRGBValue() {
-    return Math.floor(Math.random() * 254);
 }
 
 function calculateDistance(point, centroid) {
