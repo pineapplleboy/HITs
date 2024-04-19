@@ -87,6 +87,9 @@ div#canvasId {
     max-width: calc(200px + (700 - 200) * ((100vw - 500px) / (2560 - 500)));
     max-height: calc(200px + (700 - 200) * ((100vw - 500px) / (2560 - 500)));
 
+    width: 450px;
+    height: 450px;
+
     position: absolute;
     overflow: hidden;
     position: relative;
@@ -97,10 +100,6 @@ div#canvasId {
     top: 50%;
     transform: translate(-50%, -50%);
 }
-
-/* div#canvasId > canvas {
-    width: 34vw;
-} */
 
 .blob{
     position: absolute;

@@ -113,7 +113,7 @@ export function resizeCanvas(delta) {
 
     canvasSize += delta;
 
-    canvasSize = Math.min(10000, Math.max(680, canvasSize));
+    canvasSize = Math.min(10000, Math.max(430, canvasSize));
     
     canvas.width = canvasSize;
     canvas.height = canvasSize;

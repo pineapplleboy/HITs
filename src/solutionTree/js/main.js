@@ -15,10 +15,6 @@ export let categories = new Array();
 const inputElement = document.getElementById("inputCSVFile");
 inputElement.addEventListener("change", handleFiles);
 
-// const canvas = document.getElementById("canvas");
-// canvas.width = (34 * window.innerWidth / 100);
-// canvas.height = (50 * window.innerHeight / 100);
-
 function handleFiles() {
   const fileList = this.files;
   if (fileList.length) {
