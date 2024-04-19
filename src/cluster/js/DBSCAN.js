@@ -1,5 +1,5 @@
 import { getRandomColor } from "./coloring.js";
-export function DBSCAN(dataPoints, eps = 60, MinPts = 4) {
+export function DBSCAN(dataPoints, eps = 75, MinPts = 4) {
     let clusters = [];
     let visited = new Set();
 
