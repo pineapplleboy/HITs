@@ -1,94 +1,93 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Ant Algorithm</title>
+<!DOCTYPE html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Муравьиный алгоритм</title>
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/button.css">
         <link rel="stylesheet" href="../css/range.css">
         <link rel="stylesheet" href="../css/inputStyles.css">
         <link rel="stylesheet" href="../css/infoButton.css">
-    </head>
-    <body>
+</head>
+<body>
 
-        <section class="background"></section>
-        <canvas class="grain"></canvas>
+    <section class="background"></section>
+    <canvas class="grain"></canvas>
 
-        <button class="info-button" id="infoButton">?</button> 
-        <button class="back-button" id="backButton">←</button> 
+    <button class="info-button" id="infoButton">?</button> 
+    <button class="back-button" id="backButton">←</button> 
 
-        <dialog>
-            <div class="dialog-wrapper">
-                <h2>Муравьиный алгоритм</h2>
+    <dialog>
+        <div class="dialog-wrapper">
+            <h2>Муравьиный алгоритм</h2>
+            <br>
+            <h3>
+                Мало кто знает, как проходит жизнь муравья. Здесь можно найти ответ на этот вопрос.
                 <br>
-                <h3>
-                    Мало кто знает, как проходит жизнь муравья. Здесь можно найти ответ на этот вопрос.
-                    <br>
-                    Пронаблюдайте за их движением, расставляя их колонию, разбрасывая еду и пытаясь запутать их...
-                </h3>
-                <button class="closeButton" id="closeDialog">X</button>
+                Пронаблюдайте за их движением, расставляя их колонию, разбрасывая еду и пытаясь запутать их...
+            </h3>
+            <button class="closeButton" id="closeDialog">X</button>
+        </div>
+    </dialog>
+
+
+    <h1>Муравьиный</h1>
+
+    <div class="mainAlgorithmUI">
+
+        <section class="sliderContainer">
+            <div class="fullSlider">
+                <label for="antsAmount">Количество муравьёв</label>
+                <input type="range" id="antsAmount" min="10" max="2000" value="200">
+                <input id="antsText" type="number" autocomplete="off" min="10" max="2000" step="1" value="200">
             </div>
-        </dialog>
-
-
-        <h1>Муравьиный</h1>
-    
-        <div class="mainAlgorithmUI">
-
-            <section class="sliderContainer">
-                <div class="fullSlider">
-                    <label for="antsAmount">Количество муравьёв</label>
-                    <input type="range" id="antsAmount" min="10" max="2000" value="200">
-                    <input id="antsText" type="number" autocomplete="off" min="10" max="2000" step="1" value="200">
-                </div>
-                <div class="fullSlider">
-                    <label for="feromoneCoef">Feromone coefficient:</label>
-                    <input type="range" id="feromoneCoef" min="0" max="20" value="5">
-                </div>
-                <div class="fullSlider">
-                    <label for="antsInCellCoef">antsInCellCoef:</label>
-                    <input type="range" id="antsInCellCoef" min="0" max="200" value="10">
-                </div>
-                <!-- <div class="fullSlider">
-                    <label for="foodValueCoef">foodValueCoef:</label>
-                    <input type="range" id="foodValueCoef" min="1" max="1000" value="500">
-                </div> -->
-                <!-- <div class="fullSlider">
-                    <label for="decreasingFeromone">decreasingFeromone:</label>
-                    <input type="range" id="decreasingFeromone" min="1" max="100" value="85">
-                </div>
-                <div class="fullSlider">
-                    <label for="increasingFeromone">increasingFeromone:</label>
-                    <input type="range" id="increasingFeromone" min="1" max="500" value="20">
-                </div> -->
-                <div class="fullSlider">
-                    <label for="foodValue">foodValue:</label>
-                    <input type="range" id="foodValue" min="1" max="50" value="5">
-                </div>
-                <div class="fullSlider">
-                    <label for="antStepDist">antStepDist:</label>
-                    <input type="range" id="antStepDist" min="4" max="20" value="14">
-                    <input id="stepText" type="number" autocomplete="off" min="4" max="20" step="1" value="14">
-                </div>
-
-            </section>
-
-            <div class="mainPicture">
-                <canvas id="antCanvas"></canvas>
+            <div class="fullSlider">
+                <label for="feromoneCoef">Feromone coefficient:</label>
+                <input type="range" id="feromoneCoef" min="0" max="20" value="5">
+            </div>
+            <div class="fullSlider">
+                <label for="antsInCellCoef">antsInCellCoef:</label>
+                <input type="range" id="antsInCellCoef" min="0" max="200" value="10">
+            </div>
+            <!-- <div class="fullSlider">
+                <label for="foodValueCoef">foodValueCoef:</label>
+                <input type="range" id="foodValueCoef" min="1" max="1000" value="500">
+            </div> -->
+            <!-- <div class="fullSlider">
+                <label for="decreasingFeromone">decreasingFeromone:</label>
+                <input type="range" id="decreasingFeromone" min="1" max="100" value="85">
+            </div>
+            <div class="fullSlider">
+                <label for="increasingFeromone">increasingFeromone:</label>
+                <input type="range" id="increasingFeromone" min="1" max="500" value="20">
+            </div> -->
+            <div class="fullSlider">
+                <label for="foodValue">foodValue:</label>
+                <input type="range" id="foodValue" min="1" max="50" value="5">
+            </div>
+            <div class="fullSlider">
+                <label for="antStepDist">antStepDist:</label>
+                <input type="range" id="antStepDist" min="4" max="20" value="14">
+                <input id="stepText" type="number" autocomplete="off" min="4" max="20" step="1" value="14">
             </div>
 
-            <section class="buttonContainer">
-                <button id="startSimulation">Запустить алгоритм</button>
-                <button id="setWall">Поставить стену</button>
-                <button id="setFood">Поставить еду</button>
-                <button id="setHome">Поставить дом</button>
-                <button id="pauseAntSim">Пауза</button>
-            </section>
+        </section>
+
+        <div class="mainPicture">
+            <canvas id="antCanvas"></canvas>
         </div>
 
-        <script type="module" src="js/antClass.js"></script>
-        <script type="module" src="js/map.js"></script>
-        <script type="module" src="js/main.js"></script>
-        <script src="js/grain.js"></script>
-        <script src ="js/backgroundBlobs.js"></script>
-    </body>
-</html>
+        <section class="buttonContainer">
+            <button id="startSimulation">Запустить алгоритм</button>
+            <button id="setWall">Поставить стену</button>
+            <button id="setFood">Поставить еду</button>
+            <button id="setHome">Поставить дом</button>
+            <button id="pauseAntSim">Пауза</button>
+        </section>
+    </div>
+
+    <script type="module" src="js/antClass.js"></script>
+    <script type="module" src="js/map.js"></script>
+    <script type="module" src="js/main.js"></script>
+    <script src="js/grain.js"></script>
+    <script src ="js/backgroundBlobs.js"></script>
+</body>

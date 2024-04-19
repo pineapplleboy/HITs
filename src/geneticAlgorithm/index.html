@@ -1,68 +1,67 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Genetic Algorithm</title>
+<!DOCTYPE html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Генетический алгоритм</title>
         <link rel="stylesheet" href="./style.css">
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/button.css">
         <link rel="stylesheet" href="../css/range.css">
         <link rel="stylesheet" href="../css/inputStyles.css">
         <link rel="stylesheet" href="../css/infoButton.css">
-    </head>
-    <body>
-        <section class="background"></section>
-        <canvas class="grain"></canvas>
+</head>
+<body>
+    <section class="background"></section>
+    <canvas class="grain"></canvas>
 
-        <button class="info-button" id="infoButton">?</button> 
-        <button class="back-button" id="backButton">←</button> 
+    <button class="info-button" id="infoButton">?</button> 
+    <button class="back-button" id="backButton">←</button> 
 
-        <dialog>
-            <div class="dialog-wrapper">
-                <h2>Генетический алгоритм</h2>
+    <dialog>
+        <div class="dialog-wrapper">
+            <h2>Генетический алгоритм</h2>
+            <br>
+            <h3>
+                Этот алгоритм мы подсмотрели у природы. Расставляйте точки и наблюдайте, как изменяется кратчайший путь между ними.
                 <br>
-                <h3>
-                    Этот алгоритм мы подсмотрели у природы. Расставляйте точки и наблюдайте, как изменяется кратчайший путь между ними.
-                    <br>
-                    Выживает сильнейший.
-                </h3>
-                <button class="closeButton" id="closeDialog">X</button>
-            </div>
-        </dialog>
-
-        <h1>Генетический</h1>
-
-        <div class="mainAlgorithmUI">
-
-            <section class="sliderContainer">
-                <div class="fullSlider">
-                    <label for="generationsAmount">Количество поколений:</label>
-                    <input type="range" id="generationsAmount" min="200" max="20000" value="4000">
-                    <input id="genText" type="number" autocomplete="off" min="200" max="20000" step="1" value="4000">
-                </div>
-                <div class="fullSlider">
-                    <label for="individualsAmount">Особей в популяции:</label>
-                    <input type="range" id="individualsAmount" min="200" max="1000" value="400">
-                    <input id="indText" type="number" autocomplete="off" min="200" max="1000" step="1" value="400">
-                </div>
-                <div class="fullSlider">
-                    <label for="mutationChance">Шанс мутации:</label>
-                    <input type="range" id="mutationChance" min="0" max="1" step="0.01" value="0.4">
-                    <input id="mutText" type="number" autocomplete="off" min="0" max="1" step="0.01" value="0.4">
-                </div>
-            </section>
-
-            <div class="mainPicture">
-                <canvas id="canvasPoints"></canvas>
-                <canvas id="canvas"></canvas>
-            </div>
-
-            <section class="buttonContainer">
-                <button id="deleteField">Очистить поле</button>
-                <button id="startGeneticAlgorithm">Запустить алгоритм</button>
-            </section>
+                Выживает сильнейший.
+            </h3>
+            <button class="closeButton" id="closeDialog">X</button>
         </div>
-        <script src="../antAlgorithm/js/grain.js"></script>
-        <script src ="../antAlgorithm/js/backgroundBlobs.js"></script>
-        <script src="main.js"></script>
-    </body>
-</html>
+    </dialog>
+
+    <h1>Генетический</h1>
+
+    <div class="mainAlgorithmUI">
+
+        <section class="sliderContainer">
+            <div class="fullSlider">
+                <label for="generationsAmount">Количество поколений:</label>
+                <input type="range" id="generationsAmount" min="200" max="20000" value="4000">
+                <input id="genText" type="number" autocomplete="off" min="200" max="20000" step="1" value="4000">
+            </div>
+            <div class="fullSlider">
+                <label for="individualsAmount">Особей в популяции:</label>
+                <input type="range" id="individualsAmount" min="200" max="1000" value="400">
+                <input id="indText" type="number" autocomplete="off" min="200" max="1000" step="1" value="400">
+            </div>
+            <div class="fullSlider">
+                <label for="mutationChance">Шанс мутации:</label>
+                <input type="range" id="mutationChance" min="0" max="1" step="0.01" value="0.4">
+                <input id="mutText" type="number" autocomplete="off" min="0" max="1" step="0.01" value="0.4">
+            </div>
+        </section>
+
+        <div class="mainPicture">
+            <canvas id="canvasPoints"></canvas>
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <section class="buttonContainer">
+            <button id="deleteField">Очистить поле</button>
+            <button id="startGeneticAlgorithm">Запустить алгоритм</button>
+        </section>
+    </div>
+    <script src="../antAlgorithm/js/grain.js"></script>
+    <script src ="../antAlgorithm/js/backgroundBlobs.js"></script>
+    <script src="main.js"></script>
+</body>
