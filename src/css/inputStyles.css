@@ -70,6 +70,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
     border-radius: 5px;
 }
+
 select {
     border: none;
     /* appearance: none; */
@@ -77,19 +78,27 @@ select {
     width: 50%;
     background-color: #2ba369;
 
-    width: calc(60px + (400 - 60) * ((100vw - 500px) / (2560 - 500)));
+    width: calc(60px + (300 - 60) * ((100vw - 500px) / (2560 - 500)));
     height: calc(30px + (50 - 30) * ((100vh - 500px) / (1440 - 500)));
     
     font-size: calc(9px + (22 - 9) * ((100vw - 500px) / (2560 - 500)));
-
+    font-family: 'Intro';
     border-radius: 10px;
-    color: white;
-}
-
-option {
-    background-color: #1b6441;
+    color: rgb(8, 51, 8);
 }
 
 select:disabled {
-    background-color: rgb(224, 90, 28);
+    background-color: rgb(223, 90, 81);
+}
+
+.optionsName{
+    margin: 10px;
+    font-family: 'Intro';
+    font-size: calc(9px + (22 - 9) * ((100vw - 500px) / (2560 - 500)));
+}
+
+option {
+    background-color: #ffffff;
+    font-family: 'Intro';
+    font-size: calc(9px + (22 - 9) * ((100vw - 500px) / (2560 - 500)));
 }

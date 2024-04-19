@@ -203,11 +203,8 @@ export class map{
             cameFrom.set(startMazeCell + cellSize, startMazeCell);
         }
         
-        //for(let k = 0; k < fieldSize; ++k){
         while (queue.size() > 0) {
             let currentCell = queue.getElem();
-
-            console.log(Math.floor(currentCell / size), currentCell % size);
 
             let cameFromCell = cameFrom.get(currentCell);
             if (this.field[Math.floor((Math.floor(cameFromCell / size) + Math.floor(currentCell / size)) / 2)][Math.floor(cameFromCell % size + currentCell % size) / 2].wall) {

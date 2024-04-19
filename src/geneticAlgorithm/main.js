@@ -193,13 +193,16 @@ function startGeneticAlgorithm(){
 
         if (iteration >= generationsAmount) {
             geneicAlgorithmIsActive = false;
+            
+    document.getElementById("generationsAmount").disabled = false;
+    document.getElementById("mutationChance").disabled = false;
+    document.getElementById("individualsAmount").disabled = false;
             return;
         }
     
         let newPopulation = lifeCycle(paths, pathSize, individualsAmount, pathSize[0]);
         paths = newPopulation.newPopulation;
         pathSize = newPopulation.newIndPriority;
-        console.log(pathSize[0]);
         iteration++;
         if(geneicAlgorithmIsActive){
             //setTimeout(runLifeCycle);
@@ -207,6 +210,10 @@ function startGeneticAlgorithm(){
         }
     }
     
+    document.getElementById("generationsAmount").disabled = true;
+    document.getElementById("mutationChance").disabled = true;
+    document.getElementById("individualsAmount").disabled = true;
+
     animate();
 }
 

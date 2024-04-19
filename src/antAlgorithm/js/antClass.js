@@ -23,7 +23,7 @@ export class ant{
 
         //Если муравей долго не может найти еду или дом, он умирает,
         //в этот момент из-за невероятно удачного совпадения в доме вырастает новый муравей
-        if(this.path.length > 300 || this.field[this.position[0]][this.position[1]].wall){
+        if(this.path.length > Math.floor(Math.random() * 275) + 50 || this.field[this.position[0]][this.position[1]].wall){
             this.position = [this.homePoint[0] + Math.floor(Math.random() * 10), this.homePoint[1] + Math.floor(Math.random() * 10)];
             this.rotation = Math.floor(Math.random() * 8);
             this.food = false;
