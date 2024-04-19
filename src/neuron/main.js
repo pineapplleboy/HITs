@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         if (dist < 1) dist = 1;
                         dist *= dist;
 
-                        if (mousePressed === 1) colors[currentY][currentX] += 0.5 / dist;
+                        if (mousePressed === 1) colors[currentY][currentX] += 1 / dist;
                         else colors[currentY][currentX] -= 0.1 / dist;
                         if (colors[currentY][currentX] > 1) colors[currentY][currentX] = 1;
                         if (colors[currentY][currentX] < 0) colors[currentY][currentX] = 0;
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         colors = centeredColors;
 
-        drawCanvas();
+        //drawCanvas();
     }
 
     function recognizeDrawing() {
