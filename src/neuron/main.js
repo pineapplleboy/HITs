@@ -180,12 +180,10 @@ const nn = new NeuralNetwork();
 
     let resultString = "Recognized digits: ";
     const highlightColors = ['green', 'yellow', 'red'];
+    const digitBlocks = document.querySelectorAll('.digit');
     maxIndices.forEach((index, i) => {
-        if (i < highlightColors.length) {
-            const digitElement = document.querySelector(`.digit:nth-child(${index + 1})`);
-            digitElement.style.color = highlightColors[i];
-        }
-    });
+            digitBlocks[index].style.color = highlightColors[i];
+        });
     saveDrawnDigitsDataToCSV();
     document.getElementById('result').innerText = resultString;
     console.log('Max value indices:', maxIndices);

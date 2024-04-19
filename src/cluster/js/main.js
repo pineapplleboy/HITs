@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const clearButton = document.getElementById("clearButton");
     const startButton = document.getElementById("startButton");
     const centroidCountInput = document.getElementById("centroidCount");
-    const centroidCountDisplay = document.createElement("span");
-    centroidCountDisplay.textContent = centroidCountInput.value;
 
     kCanvas.addEventListener("click", function(event) {
         const rect = kCanvas.getBoundingClientRect();
@@ -51,8 +49,28 @@ document.addEventListener("DOMContentLoaded", function() {
         usedColors.clear();
     });
 
+    function editCentrText(){
+        if (document.getElementById("centrText").value != undefined) {
+
+            if (document.getElementById("centrText").value.length > 1 && document.getElementById("centrText").value[0] == "0") {
+                document.getElementById("centrText").value = Number(document.getElementById("centrText").value[1]);
+            }
+    
+            document.getElementById("centrText").value = Math.min(document.getElementById("centrText").value, 20);
+            centroidCountInput.value = document.getElementById("centrText").value;
+        }
+    
+        setTimeout(function() {
+            document.getElementById("centrText").value = Math.max(2, document.getElementById("centrText").value);
+        }, 5000)
+    }
+
+    document.querySelector("#centrText").oninput = function(){
+        editCentrText();
+    }
+
     centroidCountInput.addEventListener("input", function() {
-        centroidCountDisplay.textContent = centroidCountInput.value;
+        document.getElementById("centrText").value = centroidCountInput.value;
     });
 
     startButton.addEventListener("click", function() {
@@ -120,7 +138,3 @@ window.sessionStorage.setItem("slide", 1); // на какой слайд воз�
 document.querySelector("#backButton").onclick = function() {
     window.location.href = "../sliderMenu";
 }
-
-window.addEventListener('resize', (e) => { // перенос на другой монитор
-    maze.drawMaze();
-})

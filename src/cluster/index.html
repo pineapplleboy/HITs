@@ -4,14 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Точки для кластеризации</title>
-    <style>
-        #kCanvas {
-            border: 10px solid black;
-        }
-        #clearButton {
-            margin-top: 10px;
-        }
-    </style>
+
+    <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/infoButton.css">
     <link rel="stylesheet" href="../css/inputStyles.css">
@@ -28,7 +22,14 @@
 
     <dialog>
         <div class="dialog-wrapper">
-            <h3>Информация</h3>
+            <h2>Кластеризация</h2>
+            <br>
+            <h3>
+                Попытка понять зависимости между объектами путем выявления их кластерной структуры.
+                <br>
+                Расставляйте точки на канвасе, изучайте, пробуйте разные алгоритмы, или можете нажать кнопку сравнить и посмотреть как они работают вместе.
+                <br>
+            </h3>
             <button class="closeButton" id="closeDialog">X</button>
         </div>
     </dialog>
@@ -38,9 +39,15 @@
     <div class="mainAlgorithmUI">
         
         <section class="sliderContainer">
-            <input type="range" id="centroidCount" min="2" max="20" value="2">
+
+            <div class="fullSlider">
+                <label for="centroidCount">Количество кластеров: </label>
+                <input type="range" id="centroidCount" min="2" max="20" value="2">
+                <input id="centrText" type="number" autocomplete="off" min="2" max="20" step="1" value="2">
+            </div>
+            
         </section>
-        
+
         <div class="mainPicture">
             <canvas id="kCanvas" width="500" height="500"></canvas>
         </div>

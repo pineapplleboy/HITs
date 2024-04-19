@@ -22,6 +22,16 @@
     background-color: #81b3b3;
 }
 
+h2{
+    font-family: 'Intro';
+    color: white;
+}
+
+h3{
+    font-family: 'Intro';
+    color: white;
+}
+
 dialog {
     max-width: 40vw;
     max-height: 40vh;
@@ -47,12 +57,14 @@ dialog::backdrop {
     width: 50vw;
     height: 50vh;
 
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1),
-     rgba(255, 255, 255, 0.1));
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.001),
+     rgba(255, 255, 255, 0.001));
 
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.18);
     box-shadow: 0 8px 0 rgba(0, 0, 0, 0.37);
+
+    background-color: rgba(0, 0, 0, 0.1);
 
     border-radius: 20px;
 }
