@@ -86,6 +86,10 @@ select {
     height: calc(30px + (130 - 30) * ((100vh - 500px) / (1440 - 500)));
 }
 
+select:disabled {
+    background-color: rgb(224, 90, 28);
+}
+
 option {
     background-color: #1b6340;
 }
