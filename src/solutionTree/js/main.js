@@ -131,3 +131,9 @@ document.querySelector("#infoButton").onclick = function() {
 document.querySelector("#closeDialog").onclick = function() {
     dialog.close();
 }
+
+window.sessionStorage.setItem("slide", 4); // на какой слайд возвращаемся
+
+document.querySelector("#backButton").onclick = function() {
+    window.location.href = "../sliderMenu";
+}
