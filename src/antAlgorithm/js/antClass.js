@@ -150,6 +150,7 @@ export class ant{
 
             this.field[this.position[0]][this.position[1]].ant = Math.max(1, this.field[this.position[0]][this.position[1]].ant - 1);
             this.position = [cellsPoints[variant].x, cellsPoints[variant].y];
+
             this.field[this.position[0]][this.position[1]].ant++;
 
             let x2 = this.position[0];

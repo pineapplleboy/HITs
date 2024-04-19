@@ -4,6 +4,9 @@
         <title>Genetic Algorithm</title>
         <link rel="stylesheet" href="./style.css">
         <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/button.css">
+        <link rel="stylesheet" href="../css/range.css">
+        <link rel="stylesheet" href="../css/inputStyles.css">
     </head>
     <body>
         <section class="background"></section>
@@ -13,7 +16,23 @@
 
         <div class="mainAlgorithmUI">
 
-            <section class="sliderContainer"></section>
+            <section class="sliderContainer">
+                <div class="fullSlider">
+                    <label for="generationsAmount">Количество поколений:</label>
+                    <input type="range" id="generationsAmount" min="200" max="20000" value="4000">
+                    <input id="genText" type="number" autocomplete="off" min="200" max="20000" step="1" value="4000">
+                </div>
+                <div class="fullSlider">
+                    <label for="individualsAmount">Особей в популяции:</label>
+                    <input type="range" id="individualsAmount" min="200" max="1000" value="400">
+                    <input id="indText" type="number" autocomplete="off" min="200" max="1000" step="1" value="400">
+                </div>
+                <div class="fullSlider">
+                    <label for="mutationChance">Шанс мутации:</label>
+                    <input type="range" id="mutationChance" min="0" max="1" step="0.01" value="0.4">
+                    <input id="mutText" type="number" autocomplete="off" min="0" max="1" step="0.01" value="0.4">
+                </div>
+            </section>
 
             <div class="mainPicture">
                 <canvas id="canvasPoints"></canvas>

@@ -41,7 +41,7 @@ document.getElementById("AStarButton").onclick = function() {
 }
 
 document.getElementById("clasterButton").onclick = function() {
-    window.location.href = "../A-star";
+    window.location.href = "../cluster";
 }
 
 document.getElementById("geneticButton").onclick = function() {
@@ -57,5 +57,5 @@ document.getElementById("treeButton").onclick = function() {
 }
 
 document.getElementById("neuronButton").onclick = function() {
-    window.location.href = "../A-star";
+    window.location.href = "../neuron/try.html";
 }

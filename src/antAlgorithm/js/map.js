@@ -18,7 +18,7 @@ class PriorityQueue { // https://studyjavascript.blogspot.com/2019/03/javascript
     }
 
     isEmpty() {
-        return this.storage.length == 0;
+        return this.storage.length === 0;
     }
 
     size() {
@@ -32,7 +32,7 @@ class cell{
 
         this.x = x;
         this.y = y;
-        this.ant = 1;
+        this.ant = Number(1);
 
         this.food = 0;
         this.home = false;
