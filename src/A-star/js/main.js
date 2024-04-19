@@ -76,6 +76,6 @@ document.querySelector("#backButton").onclick = function() {
     window.location.href = "../sliderMenu";
 }
 
-window.addEventListener('resize', (e) => { // перенос на другой монитор
+window.addEventListener('resize', (e) => {
     maze.drawMaze();
 })

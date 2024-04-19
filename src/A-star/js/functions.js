@@ -14,10 +14,10 @@ export function resizeMaze() {
 
 export function selectBuildMode() {
     option = document.getElementById("selectBuildingMode").value;
-    if (option == "option1") {
+    if (option === "option1") {
         maze.buildingMode = 0;
     }
-    else if (option == "option2") {
+    else if (option === "option2") {
         maze.buildingMode = 1;
     }
     else {
