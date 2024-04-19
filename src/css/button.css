@@ -30,5 +30,5 @@
 }
 
 .buttonContainer > button:disabled {
-    background-color: rgb(224, 90, 28);
+    background-color: rgb(223, 90, 81);
 }

@@ -98,7 +98,3 @@ document.querySelector("#sliderResult").oninput = function() {
     }, 5000)
     
 }
-
-if (!document.querySelector("#sliderResult").active) {
-    
-}

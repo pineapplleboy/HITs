@@ -148,10 +148,7 @@ function mouseleaveHandler(event){
 
 function mousedownHandler(event){
 
-    console.log(canvas.width);
-    console.log(canvas.getBoundingClientRect());
     if(buildMode === 0){
-        // console.log(Math.floor((mouse.x - 40) / 40) * 10, Math.floor((mouse.y - 40) / 40) * 10);
         antMap.setWall(Math.floor((mouse.x - 40) / 40) * 10, Math.floor((mouse.y - 40) / 40) * 10);
     }
     else if(buildMode === 1){
