@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/button.css">
         <link rel="stylesheet" href="../css/range.css">
+        <link rel="stylesheet" href="../css/inputStyles.css">
     </head>
     <body>
 
@@ -17,8 +18,9 @@
 
             <section class="sliderContainer">
                 <div class="fullSlider">
-                    <label for="antsAmount">Ants amount:</label>
+                    <label for="antsAmount">Количество муравьёв</label>
                     <input type="range" id="antsAmount" min="10" max="2000" value="200">
+                    <input id="antsText" type="number" autocomplete="off" min="10" max="2000" step="1" value="200">
                 </div>
                 <div class="fullSlider">
                     <label for="feromoneCoef">Feromone coefficient:</label>
@@ -46,7 +48,8 @@
                 </div>
                 <div class="fullSlider">
                     <label for="antStepDist">antStepDist:</label>
-                    <input type="range" id="antStepDist" min="2" max="20" value="14">
+                    <input type="range" id="antStepDist" min="4" max="20" value="14">
+                    <input id="stepText" type="number" autocomplete="off" min="4" max="20" step="1" value="14">
                 </div>
 
             </section>

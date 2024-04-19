@@ -68,6 +68,46 @@ document.querySelector('#pauseAntSim').onclick = function(){
     }
 }
 
+document.querySelector("#antsText").oninput = function() {
+    editAntsText();
+}
+
+document.querySelector("#stepText").oninput = function() {
+    editStepText();
+}
+
+function editAntsText() {
+
+    antsAmount = document.getElementById("antsText").value;
+
+    if (antsAmount > 2000) {
+        antsAmount = 2000;
+        document.getElementById("antsText").value = 2000;
+    }
+    else if (antsAmount < 10) {
+        antsAmount = 10;
+        document.getElementById("antsText").value = 10;
+    }
+
+    document.getElementById("antsAmount").value = antsAmount;
+}
+
+function editStepText() {
+
+    antStepDist = document.getElementById("stepText").value;
+
+    if (antStepDist > 20) {
+        antStepDist = 20;
+        document.getElementById("stepText").value = 20;
+    }
+    else if (antStepDist < 4) {
+        antStepDist = 4;
+        document.getElementById("stepText").value = 4;
+    }
+
+    document.getElementById("antStepDist").value = antStepDist;
+}
+
 const mouse = {
     x: 0,
     y: 0,
@@ -77,16 +117,19 @@ const mouse = {
 function updateParameters() {
 
     newAntsAmount = parseInt(document.getElementById("antsAmount").value);
-    for(let i = 0; i < antsAmount; ++i){
-        ants[i].feromoneCoef = parseInt(document.getElementById("feromoneCoef").value);
-        ants[i].antsInCellCoef = parseInt(document.getElementById("antsInCellCoef").value);
+    for(let ant of ants){
+        ant.feromoneCoef = parseInt(document.getElementById("feromoneCoef").value);
+        ant.antsInCellCoef = parseInt(document.getElementById("antsInCellCoef").value);
         // ants[i].foodValueCoef = parseInt(document.getElementById("foodValueCoef").value)
-        ants[i].antStepDist = parseInt(document.getElementById("antStepDist").value);
+        ant.antStepDist = parseInt(document.getElementById("antStepDist").value);
     }
     
     // decreasingFeromone = parseInt(document.getElementById("decreasingFeromone").value) / 100;
     // increasingFeromone = parseInt(document.getElementById("increasingFeromone").value);
     foodValue = parseInt(document.getElementById("foodValue").value);
+
+    document.getElementById("antsText").value = parseInt(document.getElementById("antsAmount").value);
+    document.getElementById("stepText").value = parseInt(document.getElementById("antStepDist").value);
 }
 
 function mouseenterHandler(event){
@@ -117,8 +160,8 @@ function mousedownHandler(event){
     else if(buildMode === 2){
         antMap.setHome(Math.floor((mouse.x - 40) / 40) * 10, Math.floor((mouse.y - 40) / 40) * 10);
 
-        for(let i = 0; i < antsAmount; ++i){
-            ants[i].homePoint = [Math.floor((mouse.x - 40) / 40) * 10, Math.floor((mouse.y - 40) / 40) * 10];
+        for(let ant of ants){
+            ant.homePoint = [Math.floor((mouse.x - 40) / 40) * 10, Math.floor((mouse.y - 40) / 40) * 10];
         }
     }
 }

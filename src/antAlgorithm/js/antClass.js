@@ -70,9 +70,9 @@ export class ant{
 
             //Расчёт вероятности
             let sum = 0;
-            for(let i = 0; i < cellsPoints.length; ++i){
+            for(let prior of cellPrior){
 
-                sum += cellPrior[i];
+                sum += prior;
             }
 
             for(let i = 0; i < cellsPoints.length; ++i){
@@ -315,9 +315,9 @@ export class ant{
 
             if(this.field[x][y].food > 0){
 
-                pixelData[0] = 255 * (this.field[x][y].food - 1) / this.foodValue;
-                pixelData[1] = 255 * (this.field[x][y].food - 1) / this.foodValue;
-                pixelData[2] = 255 * (this.field[x][y].food - 1) / this.foodValue;
+                pixelData[0] = 255 * (this.field[x][y].food - 1) / this.field[x][y].maxFood;
+                pixelData[1] = 255 * (this.field[x][y].food - 1) / this.field[x][y].maxFood;
+                pixelData[2] = 255 * (this.field[x][y].food - 1) / this.field[x][y].maxFood;
             }
             else{
         

@@ -35,6 +35,7 @@ class cell{
         this.ant = Number(1);
 
         this.food = 0;
+        this.maxFood = 0;
         this.home = false;
         this.wall = false;
         this.homeFeromone = 1;
@@ -67,6 +68,7 @@ export class map{
         this.field[x][y].ant = 1;
 
         this.field[x][y].food = 0;
+        this.field[x][y].maxFood = 0;
         this.field[x][y].home = false;
         this.field[x][y].wall = false;
         this.field[x][y].homeFeromone = 1;
@@ -111,6 +113,7 @@ export class map{
 
                 this.setDefault(x + i, y + j);
                 this.field[x + i][y + j].food = this.foodValue;
+                this.field[x + i][y + j].maxFood = this.foodValue;
             }
         }
 
@@ -265,8 +268,10 @@ export class map{
 
                     if(this.field[i][j].food > 0){
 
+                        let food = this.field[i][j].maxFood;
                         this.setDefault(i, j);
-                        this.field[i][j].food = this.foodValue;
+                        this.field[i][j].food = food;
+                        this.field[i][j].maxFood = food;
 
                         this.ctx.fillStyle = '#F2E3D5';
                         this.ctx.fillRect(i * 4 + 40, j * 4 + 40, 4, 4);
