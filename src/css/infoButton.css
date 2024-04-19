@@ -8,18 +8,18 @@
     width: 50px;
     border-radius: 50px;
 
-    background-color: rgb(25, 109, 134);
+    background-color: #AFEEEE;
 
     font-size: large;
 }
 
 .info-button:hover {
-    background-color: rgb(43, 172, 211);
+    background-color: #97cfcf;
     box-shadow: 0 0 0 2px white;
 }
 
 .info-button:active {
-    background-color: rgb(33, 192, 240);
+    background-color: #81b3b3;
 }
 
 dialog{
@@ -76,17 +76,16 @@ dialog::backdrop {
     height: 50px;
     width: 50px;
     border-radius: 50px;
-
-    background-color: rgb(25, 109, 134);
+    background-color: #FFBD88;
 
     font-size: large;
 }
 
 .back-button:hover {
-    background-color: rgb(43, 172, 211);
+    background-color: #e4a979;
     box-shadow: 0 0 0 2px white;
 }
 
 .back-button:active {
-    background-color: rgb(33, 192, 240);
+    background-color: #c7946b;
 }
