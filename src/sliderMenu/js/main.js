@@ -61,5 +61,5 @@ document.getElementById("neuronButton").onclick = function() {
 }
 
 document.getElementById("backButton").onclick = function() {
-    window.location.href = "../mainPage";
+    window.location.href = "../";
 }
