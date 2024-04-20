@@ -188,53 +188,52 @@ function spawnAnts(){
 }
 
 function makeSimulationStep() {
-
-    if(newAntsAmount < antsAmount){
-        ants.splice(newAntsAmount, antsAmount - newAntsAmount);
-        antsAmount = newAntsAmount;
-    }
-    else if(newAntsAmount > antsAmount){
-
-        for(let i = 0; i < newAntsAmount - antsAmount; ++i){
-            ants.push(new ant(antMap.homePoint, antMap.fieldSize, antMap.field, ctx, foodValue, feromoneCoef, antsInCellCoef, increasingFeromone, foodValueCoef, antStepDist));
+    const IntervalId = setInterval(function() {
+        if(newAntsAmount < antsAmount){
+            ants.splice(newAntsAmount, antsAmount - newAntsAmount);
+            antsAmount = newAntsAmount;
         }
-        antsAmount = newAntsAmount;
-    }
-
-    if (pauseMode) {
-        return;
-    }
-
-    for(let j = 0; j < antsAmount; ++j){
+        else if(newAntsAmount > antsAmount){
     
-        if(!ants[j].food){
-
-            if(antMap.field[ants[j].position[0]][ants[j].position[1]].food > 0){
-                ants[j].takeFood();
-                ants[j].path = [ants[j].position];
+            for(let i = 0; i < newAntsAmount - antsAmount; ++i){
+                ants.push(new ant(antMap.homePoint, antMap.fieldSize, antMap.field, ctx, foodValue, feromoneCoef, antsInCellCoef, increasingFeromone, foodValueCoef, antStepDist));
+            }
+            antsAmount = newAntsAmount;
+        }
+    
+        if (pauseMode) {
+            clearInterval(IntervalId);
+        }
+    
+        for(let j = 0; j < antsAmount; ++j){
+        
+            if(!ants[j].food){
+    
+                if(antMap.field[ants[j].position[0]][ants[j].position[1]].food > 0){
+                    ants[j].takeFood();
+                    ants[j].path = [ants[j].position];
+                }
+        
+                else{
+                    ants[j].move();
+                }
             }
     
             else{
-                ants[j].move();
+    
+                if(antMap.field[ants[j].position[0]][ants[j].position[1]].home === true){
+                    ants[j].dropFood();
+                    ants[j].path = [ants[j].position];
+                }
+        
+                else{
+                    ants[j].move();
+                }
             }
         }
-
-        else{
-
-            if(antMap.field[ants[j].position[0]][ants[j].position[1]].home === true){
-                ants[j].dropFood();
-                ants[j].path = [ants[j].position];
-            }
     
-            else{
-                ants[j].move();
-            }
-        }
-    }
-
-    antMap.reduceFeromones();
-    
-    requestAnimationFrame(makeSimulationStep);
+        antMap.reduceFeromones();
+    })
 }
 
 createNewField();

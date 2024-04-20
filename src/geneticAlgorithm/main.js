@@ -129,6 +129,10 @@ document.querySelector('#startGeneticAlgorithm').onclick = function(){
     startGeneticAlgorithm();
 }
 
+document.querySelector('#stop').onclick = function(){
+    geneicAlgorithmIsActive = false;
+}
+
 function mouseenterHandler(event){
     mouse.over = true;
 }
@@ -195,32 +199,35 @@ function startGeneticAlgorithm(){
 
     let iteration = 0;
     
-    function animate() {
+    const IntervalId = setInterval(function() {
 
         if (iteration >= generationsAmount) {
             geneicAlgorithmIsActive = false;
             
-    document.getElementById("generationsAmount").disabled = false;
-    document.getElementById("mutationChance").disabled = false;
-    document.getElementById("individualsAmount").disabled = false;
-            return;
+            document.getElementById("generationsAmount").disabled = false;
+            document.getElementById("mutationChance").disabled = false;
+            document.getElementById("individualsAmount").disabled = false;
+            document.getElementById("stop").disabled = true;
+            clearInterval(IntervalId);
         }
     
         let newPopulation = lifeCycle(paths, pathSize, individualsAmount, pathSize[0]);
         paths = newPopulation.newPopulation;
         pathSize = newPopulation.newIndPriority;
         iteration++;
-        if(geneicAlgorithmIsActive){
-            //setTimeout(runLifeCycle);
-            requestAnimationFrame(animate);
+        if(!geneicAlgorithmIsActive){
+            clearInterval(IntervalId);
+            document.getElementById("generationsAmount").disabled = false;
+            document.getElementById("mutationChance").disabled = false;
+            document.getElementById("individualsAmount").disabled = false;
+            document.getElementById("stop").disabled = true;
         }
-    }
+    })
     
     document.getElementById("generationsAmount").disabled = true;
     document.getElementById("mutationChance").disabled = true;
     document.getElementById("individualsAmount").disabled = true;
-
-    animate();
+    document.getElementById("stop").disabled = false;
 }
 
 //Сортировка популяции в порядке возрастания длинны пути коммивояжёра
