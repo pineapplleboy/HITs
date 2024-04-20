@@ -37,22 +37,22 @@ canvas.addEventListener("mousedown", mousedownHandler);
 document.getElementById("antsAmount").addEventListener("input", updateParameters);
 document.getElementById("feromoneCoef").addEventListener("input", updateParameters);
 document.getElementById("antsInCellCoef").addEventListener("input", updateParameters);
-// document.getElementById("foodValueCoef").addEventListener("input", updateParameters);
-// document.getElementById("decreasingFeromone").addEventListener("input", updateParameters);
-// document.getElementById("increasingFeromone").addEventListener("input", updateParameters);
+
 document.getElementById("foodValue").addEventListener("input", updateParameters);
 document.getElementById("antStepDist").addEventListener("input", updateParameters);
 
-document.querySelector('#setWall').onclick = function(){
-    buildMode = 0;
-}
+document.querySelector('#selectBuildingMode').oninput = function() { // выбор режима строительства
+    let option = document.getElementById("selectBuildingMode").value;
 
-document.querySelector('#setFood').onclick = function(){
-    buildMode = 1;
-}
-
-document.querySelector('#setHome').onclick = function(){
-    buildMode = 2;
+    if (option == "option1") {
+        buildMode = 0;
+    }
+    else if (option == "option2") {
+        buildMode = 1;
+    }
+    else {
+        buildMode = 2;
+    }
 }
 
 document.querySelector('#startSimulation').onclick = function(){

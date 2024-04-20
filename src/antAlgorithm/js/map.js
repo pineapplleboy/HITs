@@ -77,6 +77,10 @@ export class map{
 
     setWall(x, y){
 
+        if (this.field[x][y].home) {
+            return;
+        }
+
         if(this.field[x][y].wall){
 
             for(let i = 0; i < 10; ++i){
@@ -107,6 +111,10 @@ export class map{
     }
 
     setFood(x, y){
+
+        if (this.field[x][y].home) {
+            return;
+        }
 
         for(let i = 0; i < 5; ++i){
             for(let j = 0; j < 5; ++j){
